@@ -1,0 +1,412 @@
+fileFormatVersion: 2
+guid: bb713159ed664224ea530fc0d635115d
+timeCreated: 1492555516
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: female_tilesheet_0
+    21300002: female_tilesheet_1
+    21300004: female_tilesheet_2
+    21300006: female_tilesheet_3
+    21300008: female_tilesheet_4
+    21300010: female_tilesheet_5
+    21300012: female_tilesheet_6
+    21300014: female_tilesheet_7
+    21300016: female_tilesheet_8
+    21300018: female_tilesheet_9
+    21300020: female_tilesheet_10
+    21300022: female_tilesheet_11
+    21300024: female_tilesheet_12
+    21300026: female_tilesheet_13
+    21300028: female_tilesheet_14
+    21300030: female_tilesheet_15
+    21300032: female_tilesheet_16
+    21300034: female_tilesheet_17
+    21300036: female_tilesheet_18
+    21300038: female_tilesheet_19
+    21300040: female_tilesheet_20
+    21300042: female_tilesheet_21
+    21300044: female_tilesheet_22
+    21300046: female_tilesheet_23
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: female_tilesheet_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 220
+        width: 63
+        height: 87
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 220
+        width: 71
+        height: 92
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_2
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 222
+        width: 78
+        height: 88
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_3
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 220
+        width: 66
+        height: 75
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_4
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 223
+        width: 79
+        height: 90
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_5
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 224
+        width: 58
+        height: 88
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_6
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 224
+        width: 58
+        height: 88
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_7
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 220
+        width: 76
+        height: 85
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_8
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 220
+        width: 75
+        height: 84
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_9
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 110
+        width: 71
+        height: 86
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_10
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 110
+        width: 52
+        height: 88
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_11
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 110
+        width: 76
+        height: 88
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_12
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 110
+        width: 53
+        height: 84
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_13
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 110
+        width: 69
+        height: 87
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_14
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 110
+        width: 78
+        height: 90
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_15
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 110
+        width: 77
+        height: 86
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_16
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 114
+        width: 79
+        height: 88
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_17
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 112
+        width: 76
+        height: 90
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_18
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 74
+        height: 85
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_19
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 0
+        width: 77
+        height: 75
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_20
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 75
+        height: 92
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_21
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 0
+        width: 63
+        height: 87
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_22
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 0
+        width: 62
+        height: 88
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: female_tilesheet_23
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 0
+        width: 59
+        height: 86
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
