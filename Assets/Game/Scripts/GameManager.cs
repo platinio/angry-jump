@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     #endregion SINGLETON
 
     #region PUBLIC_FIELDS
-    public GameObject mark;
+    public float errorRange;
     public List<Color> colors;
     public float delay;
     public List<GameObject> normalPieces;
@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     private Transform initialPlatform;
     private readonly int maxChance = 11;
     private bool isFirstTime = true;
+    private SpriteRenderer playerSP;
     #endregion PRIVATE_FIELDS
 
     #region UNITY_EVENTS
@@ -77,13 +78,10 @@ public class GameManager : MonoBehaviour
 
         //initilize values
         //get the initial height
-        SpriteRenderer playerRender = player.GetComponent<SpriteRenderer>();
-        float playerScale = player.transform.localScale.y;
-        height = player.transform.position.y - ((playerRender.bounds.size.y / 2.0f) * playerScale);
-
-        Instantiate(mark , new Vector2(player.transform.position.x , height) , Quaternion.identity);
-
-        Debug.Log(height);
+        playerSP = player.GetComponent<SpriteRenderer>();
+        ResetHeight();
+              
+                
         chanceToNormal /= 10;
 
         player.Initialize();
@@ -140,7 +138,7 @@ public class GameManager : MonoBehaviour
     {
         return colors[Random.Range(0 , colors.Count)];
     }
-
+    //cada vez que se genera una nueva plataforma debemos chequear que vaya a la altura correcta
     private void InstantiatePiece(GameObject go)
     {
         //instantiate piece
@@ -164,6 +162,7 @@ public class GameManager : MonoBehaviour
 
         int r = Random.Range(0, 2);
         Vector2 pos = r == 0 ? new Vector2(player.transform.position.x + distance, height) : new Vector2(player.transform.position.x - distance , height + platformOffset);
+        pos = CheckPosition(pos , clone);
         clone.transform.localPosition = pos;
 
         //set speed
@@ -171,7 +170,25 @@ public class GameManager : MonoBehaviour
               
     }
 
-    
-  
+    private Vector2 CheckPosition(Vector2 pos , PlatformController PC)
+    {
+        float playerScale = player.transform.localScale.y;
+        float playerHeight = player.transform.position.y - ((playerSP.bounds.size.y / 2.0f) * playerScale);
+
+        if (Vector2.Distance(new Vector2(0, pos.y), new Vector2(0, playerHeight)) > errorRange)
+        {
+            Debug.Log("reset");
+            return new Vector2(pos.x, playerHeight + (PC.height / 2.0f));
+        }
+            
+
+        return pos;
+    }
+
+    private void ResetHeight()
+    {
+        float playerScale = player.transform.localScale.y;
+        height = player.transform.position.y - ((playerSP.bounds.size.y / 2.0f) * playerScale);
+    }
 
 }
