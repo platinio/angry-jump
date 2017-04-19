@@ -27,8 +27,12 @@ public class GameManager : MonoBehaviour
     #endregion SINGLETON
 
     #region PUBLIC_FIELDS
+    public GameObject mark;
+    public List<Color> colors;
     public List<GameObject> normalPieces;
     public List<GameObject> damagePieces;
+    public float platformsSpeed;
+    public float platformOffset;
     [Range(0,100)]
     public int chanceToNormal;
     [Tooltip("Distance in x plane betewn player and piece")]
@@ -41,7 +45,7 @@ public class GameManager : MonoBehaviour
     private Transform piecesParent;
     private Transform initialPlatform;
     private readonly int maxChance = 11;
-   
+    private bool isFirstTime = true;
     #endregion PRIVATE_FIELDS
 
     #region UNITY_EVENTS
@@ -75,7 +79,13 @@ public class GameManager : MonoBehaviour
         float playerScale = player.transform.localScale.y;
         height = player.transform.position.y - ((playerRender.bounds.size.y / 2.0f) * playerScale);
 
+        Instantiate(mark , new Vector2(player.transform.position.x , height) , Quaternion.identity);
+
+        Debug.Log(height);
         chanceToNormal /= 10;
+
+        player.Initialize();
+
     }
     #endregion UNITY_EVENTS
 
@@ -117,11 +127,7 @@ public class GameManager : MonoBehaviour
 
     public Color GetRandomColor()
     {
-        float r = Random.Range(0, 256) / 255.0f;
-        float g = Random.Range(0, 256) / 255.0f;
-        float b = Random.Range(0, 256) / 255.0f;
-
-        return new Color(r, g, b);
+        return colors[Random.Range(0 , colors.Count)];
     }
 
     private void InstantiatePiece(GameObject go)
@@ -135,16 +141,23 @@ public class GameManager : MonoBehaviour
             SpriteRenderer sprite = clone.transform.GetChild(n).GetComponent<SpriteRenderer>();
             sprite.color = GetRandomColor();
 
-            if(n == 0)
-                height += sprite.bounds.size.y * clone.transform.localScale.y;
+            if (n == 0)
+            {
+                float spriteSize = isFirstTime ? (sprite.sprite.bounds.size.y / 2.0f) : sprite.sprite.bounds.size.y;
+                height += spriteSize * clone.transform.localScale.y;
+            }
+               
+            
         }
 
         int r = Random.Range(0, 2);
-        Vector2 pos = r == 0 ? new Vector2(player.transform.position.x + distance, height) : new Vector2(player.transform.position.x - distance , height);
-        clone.transform.position = pos;
+        Vector2 pos = r == 0 ? new Vector2(player.transform.position.x + distance, height) : new Vector2(player.transform.position.x - distance , height + platformOffset);
+        clone.transform.localPosition = pos;
 
+        //set speed
+        clone.GetComponent<PlatformController>().speed = platformsSpeed * (r == 0 ? -1.0f : 1.0f);
 
-        
+        isFirstTime = false;
     }
 
     
