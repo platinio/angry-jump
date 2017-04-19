@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     #region PUBLIC_FIELDS
     public GameObject mark;
     public List<Color> colors;
+    public float delay;
     public List<GameObject> normalPieces;
     public List<GameObject> damagePieces;
     public float platformsSpeed;
@@ -40,7 +41,8 @@ public class GameManager : MonoBehaviour
     #endregion PUBLIC_FIELDS
 
     #region PRIVATE_FIELDS
-    private float height;
+    public float height;
+    private float timer;
     private Player player;
     private Transform piecesParent;
     private Transform initialPlatform;
@@ -86,24 +88,33 @@ public class GameManager : MonoBehaviour
 
         player.Initialize();
 
+        //start creating platforms
+        CreateRandomPiece();
+
     }
-    #endregion UNITY_EVENTS
-
-    private float delay = 2.0f;
-    private float timer = 5.0f;
-
     void Update()
     {
         timer += Time.deltaTime;
         if (timer > delay)
-        {
             CreateRandomPiece();
-            timer = 0;
-        }
+            
+        
     }
+
+
+    #endregion UNITY_EVENTS
+        
+    public void UpdateHeight(float h)
+    {        
+        height +=  h;        
+    }
+    
 
     public void CreateRandomPiece()
     {
+        //reset timr
+        timer = 0;
+
         //random number betewn 0 and maxChance
         int r = Random.Range(0 , maxChance);
         int index;
@@ -133,21 +144,22 @@ public class GameManager : MonoBehaviour
     private void InstantiatePiece(GameObject go)
     {
         //instantiate piece
-        GameObject clone = Instantiate(go , piecesParent) as GameObject;
-        
+        PlatformController clone = Instantiate(go , piecesParent).GetComponent<PlatformController>();
+        clone.Initialize();
+
         //set random colors
         for(int n = 0 ; n < clone.transform.childCount ; n++)
         {
             SpriteRenderer sprite = clone.transform.GetChild(n).GetComponent<SpriteRenderer>();
-            sprite.color = GetRandomColor();
+            sprite.color = GetRandomColor();    
+        }
 
-            if (n == 0)
-            {
-                float spriteSize = isFirstTime ? (sprite.sprite.bounds.size.y / 2.0f) : sprite.sprite.bounds.size.y;
-                height += spriteSize * clone.transform.localScale.y;
-            }
-               
-            
+        //if is the first time set the height and put it to 0
+        if (isFirstTime)
+        {
+            UpdateHeight(clone.height / 2.0f);
+            //clone.height = 0;
+            isFirstTime = false;
         }
 
         int r = Random.Range(0, 2);
@@ -156,8 +168,7 @@ public class GameManager : MonoBehaviour
 
         //set speed
         clone.GetComponent<PlatformController>().speed = platformsSpeed * (r == 0 ? -1.0f : 1.0f);
-
-        isFirstTime = false;
+              
     }
 
     

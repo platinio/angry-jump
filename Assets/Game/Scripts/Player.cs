@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 	
 	private Rigidbody2D RB;
 	private Animator anim;
+    private bool checkHeight;
 
 	private bool IsGrounded
 	{
@@ -52,6 +53,8 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
             Jump();
         //SetAnimParam();
+
+                
     }
 
     public void Jump()
@@ -72,6 +75,7 @@ public class Player : MonoBehaviour
     {
         RB.velocity = new Vector2(0, 0);
         RB.AddForce(new Vector2(0, jumpForce));
+                
     }
 
     
