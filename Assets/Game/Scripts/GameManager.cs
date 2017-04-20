@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -138,6 +139,12 @@ public class GameManager : MonoBehaviour
     {
         return colors[Random.Range(0 , colors.Count)];
     }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
+    }
+
     //cada vez que se genera una nueva plataforma debemos chequear que vaya a la altura correcta
     private void InstantiatePiece(GameObject go)
     {
