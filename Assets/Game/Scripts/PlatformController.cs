@@ -27,7 +27,8 @@ public class PlatformController : MonoBehaviour
         }
         else
         {
-            height = transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.bounds.size.y;
+            Collider2D col = GetComponent<Collider2D>();
+            height = col.bounds.size.y;
         }
 
     }
@@ -36,7 +37,7 @@ public class PlatformController : MonoBehaviour
     void Update()
     {
         if(speed != 0)
-            transform.Translate(Vector2.up * speed * Time.deltaTime);
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
                
 
     }
