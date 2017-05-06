@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -39,6 +40,10 @@ public class GameManager : MonoBehaviour
     public int chanceToNormal;
     [Tooltip("Distance in x plane betewn player and piece")]
     public int distance;
+
+    [Header("UI Elements")]
+    public Text score;
+
     #endregion PUBLIC_FIELDS
 
     #region PRIVATE_FIELDS
@@ -50,6 +55,7 @@ public class GameManager : MonoBehaviour
     private readonly int maxChance = 11;
     private bool isFirstTime = true;
     private SpriteRenderer playerSP;
+    private int currentScore;
     #endregion PRIVATE_FIELDS
 
     #region UNITY_EVENTS
@@ -93,10 +99,11 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        
         timer += Time.deltaTime;
         if (timer > delay)
             CreateRandomPiece();
-            
+       
         
     }
 
@@ -143,6 +150,27 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
+    }
+
+    public void AddScore()
+    {
+        currentScore++;
+        int length = currentScore.ToString().Length;       
+       
+        string text = string.Empty;
+
+        if (length == 1)
+            text = "Score 000" + currentScore;
+        else if(length == 2)
+            text = "Score 00" + currentScore;
+        else if (length == 3)
+            text = "Score 0" + currentScore;
+        else 
+            text = "Score " + currentScore;
+
+        
+        score.text = text;
+        
     }
 
     //cada vez que se genera una nueva plataforma debemos chequear que vaya a la altura correcta

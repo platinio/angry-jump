@@ -19,13 +19,34 @@ public class Player : MonoBehaviour
     #region PRIVATE_FIELDS
     private Rigidbody2D RB;
 	private Animator anim;
+    private GameObject currentPlatform;
     private float initialHeight;
     private bool checkHeight;
     private bool IsGrounded
 	{
 		get
 		{
-			return Physics2D.Raycast (new Vector2(transform.position.x + offSetX , transform.position.y + offSetY) , Vector2.down , rayLegth , collisionLayer);		
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + offSetX, transform.position.y + offSetY), Vector2.down, rayLegth, collisionLayer);
+
+            if (hit.collider == null)
+                return false;
+
+            if (currentPlatform != null)
+            {
+                if (currentPlatform != hit.collider.gameObject)
+                {
+                    currentPlatform = hit.collider.gameObject;
+                    GameManager.instance.AddScore();
+                }
+            }
+
+            else
+            {
+                currentPlatform = hit.collider.gameObject;
+                GameManager.instance.AddScore();
+            }
+
+			return true;		
 		}
 	}
     #endregion PRIVATE_FIELDS

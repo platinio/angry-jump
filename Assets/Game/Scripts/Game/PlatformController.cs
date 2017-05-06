@@ -2,13 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlatformController : MonoBehaviour
 {
     public float speed;
     public bool isVertical;
     [HideInInspector]
     public float height;
+    public Transform Center
+    {
+        get
+        {
+            if (_Center == null)
+                _Center = transform.FindChild("Center");
+            return _Center;
+        }
 
+        set
+        {
+            _Center = value;
+        }
+    }
+
+    private Transform _Center;
     private Rigidbody2D RB;
     private SpriteRenderer SP;
     
@@ -23,7 +39,9 @@ public class PlatformController : MonoBehaviour
 
         if (isVertical)
         {
-            //do soemting
+            Collider2D col = GetComponent<Collider2D>();
+            height = col.bounds.size.x * 2;
+
         }
         else
         {
@@ -36,9 +54,12 @@ public class PlatformController : MonoBehaviour
 
     void Update()
     {
-        if(speed != 0)
+        if (speed == 0)
+            return;
+        if(!isVertical)
             transform.Translate(Vector2.left * speed * Time.deltaTime);
-               
+        else
+            transform.Translate(Vector2.down * speed * Time.deltaTime);
 
     }
 
@@ -58,6 +79,12 @@ public class PlatformController : MonoBehaviour
             GameManager.instance.UpdateHeight(height);
             GameManager.instance.CreateRandomPiece();
         }
+    }
+    
+    
+    public void SetPositionTop()
+    {
+        
     }
 	
 }
