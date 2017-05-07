@@ -196,12 +196,12 @@ public class GameManager : MonoBehaviour
         }
 
         int r = Random.Range(0, 2);
-        Vector2 pos = r == 0 ? new Vector2(player.transform.position.x + distance, height) : new Vector2(player.transform.position.x - distance , height + platformOffset);
+        Vector2 pos = r == 0 ? new Vector2(player.transform.position.x + distance, height) : new Vector2(player.transform.position.x - distance , height);
         pos = CheckPosition(pos , clone);
         clone.transform.localPosition = pos;
 
         //set speed
-        clone.GetComponent<PlatformController>().speed = platformsSpeed * (r == 0 ? -1.0f : 1.0f);
+        clone.speed = platformsSpeed * (r == 0 ? -1.0f : 1.0f);
               
     }
 

@@ -21,16 +21,7 @@ namespace Platinio
 
             if (GUILayout.Button("Set Center"))
             {
-                Transform center = platform.transform.FindChild("Center");
-
-                if (center == null)
-                {
-                    center = new GameObject("Center").transform;
-                    center.transform.parent = platform.transform;
-                }
-
-                center.localPosition = platform.GetComponent<BoxCollider2D>().offset;
-                //center.position = platform.GetComponent<BoxCollider2D>().offset;
+               
                              
             }
 

@@ -9,22 +9,7 @@ public class PlatformController : MonoBehaviour
     public bool isVertical;
     [HideInInspector]
     public float height;
-    public Transform Center
-    {
-        get
-        {
-            if (_Center == null)
-                _Center = transform.FindChild("Center");
-            return _Center;
-        }
-
-        set
-        {
-            _Center = value;
-        }
-    }
-
-    private Transform _Center;
+    
     private Rigidbody2D RB;
     private SpriteRenderer SP;
     
@@ -47,6 +32,7 @@ public class PlatformController : MonoBehaviour
         {
             Collider2D col = GetComponent<Collider2D>();
             height = col.bounds.size.y;
+            Debug.Log(height);
         }
 
     }
@@ -76,6 +62,7 @@ public class PlatformController : MonoBehaviour
         {
             RB.isKinematic = false;
             speed = 0;
+            Debug.Log("update height" + height);
             GameManager.instance.UpdateHeight(height);
             GameManager.instance.CreateRandomPiece();
         }
