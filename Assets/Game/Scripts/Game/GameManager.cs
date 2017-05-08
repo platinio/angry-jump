@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     public int distance;
 
     [Header("UI Elements")]
-    public Text score;
+    
 
     #endregion PUBLIC_FIELDS
 
@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
     private readonly int maxChance = 11;
     private bool isFirstTime = true;
     private SpriteRenderer playerSP;
-    private int currentScore;
     private PlatformController previusPlatform;
     #endregion PRIVATE_FIELDS
 
@@ -109,13 +108,16 @@ public class GameManager : MonoBehaviour
     }
     #endregion UNITY_EVENTS
 
-        
-    public void UpdateHeight(float h)
-    {        
-        height +=  h;        
-    }
+    
 
     #region PUBLIC_METHODS
+
+
+    public void UpdateHeight(float h)
+    {
+        height += h;
+    }
+
     public void CreateRandomPiece()
     {
         //reset timr
@@ -152,26 +154,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
     }
 
-    public void AddScore()
-    {
-        currentScore++;
-        int length = currentScore.ToString().Length;       
-       
-        string text = string.Empty;
-
-        if (length == 1)
-            text = "Score 000" + currentScore;
-        else if(length == 2)
-            text = "Score 00" + currentScore;
-        else if (length == 3)
-            text = "Score 0" + currentScore;
-        else 
-            text = "Score " + currentScore;
-
-        
-        score.text = text;
-        
-    }
+    
     #endregion PUBLIC_METHODS
 
     #region PRIVATE_METHODS
@@ -194,19 +177,24 @@ public class GameManager : MonoBehaviour
         {
             UpdateHeight(clone.height / 2.0f);
             isFirstTime = false;
+
+            if (clone.isVertical)
+                UpdateHeight(0.4f);            
+
         }
 
-        
-        
+
         if (previusPlatform != null)
         {
             if (!previusPlatform.isVertical && clone.isVertical)
-                UpdateHeight((previusPlatform.height / 2) + 0.15f); 
-            else if(previusPlatform.isVertical && clone.isVertical)
+                UpdateHeight((previusPlatform.height / 2) + 0.15f);
+            else if (previusPlatform.isVertical && clone.isVertical)
                 UpdateHeight((previusPlatform.height / 2) + 0.52f);
             else if (previusPlatform.isVertical && !clone.isVertical)
                 UpdateHeight((previusPlatform.height / 2) + 0.0f);
         }
+        
+        
 
         //get random
         int r = Random.Range(0, 2);
@@ -229,8 +217,7 @@ public class GameManager : MonoBehaviour
         if (Vector2.Distance(new Vector2(0, pos.y), new Vector2(0, playerHeight)) > errorRange)
         {
             return new Vector2(pos.x, playerHeight + (PC.height / 2.0f));
-        }
-            
+        }            
 
         return pos;
     }
