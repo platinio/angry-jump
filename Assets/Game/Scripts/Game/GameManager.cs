@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public float delay;
     public List<GameObject> normalPieces;
     public List<GameObject> damagePieces;
-    public float platformsSpeed;
+    public float platformSpeed;
     public float platformOffset;
     [Range(0,100)]
     public int chanceToNormal;
@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     private bool isFirstTime = true;
     private SpriteRenderer playerSP;
     private int currentScore;
+    private PlatformController previusPlatform;
     #endregion PRIVATE_FIELDS
 
     #region UNITY_EVENTS
@@ -106,16 +107,15 @@ public class GameManager : MonoBehaviour
        
         
     }
-
-
     #endregion UNITY_EVENTS
+
         
     public void UpdateHeight(float h)
     {        
         height +=  h;        
     }
-    
 
+    #region PUBLIC_METHODS
     public void CreateRandomPiece()
     {
         //reset timr
@@ -172,7 +172,9 @@ public class GameManager : MonoBehaviour
         score.text = text;
         
     }
+    #endregion PUBLIC_METHODS
 
+    #region PRIVATE_METHODS
     //cada vez que se genera una nueva plataforma debemos chequear que vaya a la altura correcta
     private void InstantiatePiece(GameObject go)
     {
@@ -191,17 +193,31 @@ public class GameManager : MonoBehaviour
         if (isFirstTime)
         {
             UpdateHeight(clone.height / 2.0f);
-            //clone.height = 0;
             isFirstTime = false;
         }
 
+        
+        
+        if (previusPlatform != null)
+        {
+            if (!previusPlatform.isVertical && clone.isVertical)
+                UpdateHeight((previusPlatform.height / 2) + 0.15f); 
+            else if(previusPlatform.isVertical && clone.isVertical)
+                UpdateHeight((previusPlatform.height / 2) + 0.52f);
+            else if (previusPlatform.isVertical && !clone.isVertical)
+                UpdateHeight((previusPlatform.height / 2) + 0.0f);
+        }
+
+        //get random
         int r = Random.Range(0, 2);
-        Vector2 pos = r == 0 ? new Vector2(player.transform.position.x + distance, height) : new Vector2(player.transform.position.x - distance , height);
+        //choose left or right
+        Vector2 pos = r == 0 ? new Vector2(player.transform.position.x + distance, height) : new Vector2(player.transform.position.x - distance, height); 
         pos = CheckPosition(pos , clone);
         clone.transform.localPosition = pos;
 
         //set speed
-        clone.speed = platformsSpeed * (r == 0 ? -1.0f : 1.0f);
+        clone.speed = platformSpeed * (r == 0 ? -1.0f: 1.0f);
+        previusPlatform = clone;
               
     }
 
@@ -212,7 +228,6 @@ public class GameManager : MonoBehaviour
 
         if (Vector2.Distance(new Vector2(0, pos.y), new Vector2(0, playerHeight)) > errorRange)
         {
-            Debug.Log("reset");
             return new Vector2(pos.x, playerHeight + (PC.height / 2.0f));
         }
             
@@ -225,5 +240,5 @@ public class GameManager : MonoBehaviour
         float playerScale = player.transform.localScale.y;
         height = player.transform.position.y - ((playerSP.bounds.size.y / 2.0f) * playerScale);
     }
-
+    #endregion PRIVATE_METHODS
 }

@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
 	public float rayLegth;
 	public float offSetX;
 	public float offSetY;
-	public LayerMask collisionLayer;
     #endregion PUBLIC_FIELDS
 
     #region PRIVATE_FIELDS
@@ -26,7 +25,7 @@ public class Player : MonoBehaviour
 	{
 		get
 		{
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + offSetX, transform.position.y + offSetY), Vector2.down, rayLegth, collisionLayer);
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + offSetX, transform.position.y + offSetY), Vector2.down, rayLegth, Constants.instance.layers.Platform);
 
             if (hit.collider == null)
                 return false;
@@ -54,6 +53,7 @@ public class Player : MonoBehaviour
 
     public void Initialize()
     {
+        
         //get references
         RB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();

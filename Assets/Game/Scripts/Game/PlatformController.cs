@@ -7,12 +7,10 @@ public class PlatformController : MonoBehaviour
 {
     public float speed;
     public bool isVertical;
-    [HideInInspector]
-    public float height;
+    [HideInInspector] public float height;
     
     private Rigidbody2D RB;
-    private SpriteRenderer SP;
-    
+    private SpriteRenderer SP;  
    
 
     public void Initialize()
@@ -20,20 +18,15 @@ public class PlatformController : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
 
         if (RB != null)
-            RB.isKinematic = true;
+            RB.isKinematic = true; //deactivated physics
+
+        Collider2D col = GetComponent<Collider2D>();
 
         if (isVertical)
-        {
-            Collider2D col = GetComponent<Collider2D>();
-            height = col.bounds.size.x * 2;
-
-        }
+            height = col.bounds.size.x;        
         else
-        {
-            Collider2D col = GetComponent<Collider2D>();
-            height = col.bounds.size.y;
-            Debug.Log(height);
-        }
+            height = col.bounds.size.y;            
+        
 
     }
 
@@ -58,20 +51,14 @@ public class PlatformController : MonoBehaviour
             return;
         
 
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(Constants.instance.tags.player))
         {
-            RB.isKinematic = false;
+            RB.isKinematic = false; //reactivated physics
             speed = 0;
-            Debug.Log("update height" + height);
-            GameManager.instance.UpdateHeight(height);
-            GameManager.instance.CreateRandomPiece();
+            GameManager.instance.UpdateHeight(height); 
+            GameManager.instance.CreateRandomPiece();//reate another piece
         }
     }
-    
-    
-    public void SetPositionTop()
-    {
         
-    }
 	
 }
