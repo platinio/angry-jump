@@ -40,14 +40,12 @@ public class GameManager : MonoBehaviour
     public int chanceToNormal;
     [Tooltip("Distance in x plane betewn player and piece")]
     public int distance;
-
-    [Header("UI Elements")]
-    
+    public float height;
+          
 
     #endregion PUBLIC_FIELDS
 
-    #region PRIVATE_FIELDS
-    public float height;
+    #region PRIVATE_FIELDS    
     private float timer;
     private Player player;
     private Transform piecesParent;

@@ -98,7 +98,17 @@ public class Player : MonoBehaviour
         if (transform.position.y < (initialHeight - 1))
             GameManager.instance.GameOver();
 
-                
+        Debug.Log(RB.velocity);
+    }
+
+    void FixedUpdate()
+    {
+        if (RB.velocity.x != 0)
+        {
+            Vector2 newVelocity = RB.velocity;
+            newVelocity.x = 0;
+            RB.velocity = newVelocity;
+        }
     }
 
     /// <summary>
