@@ -54,8 +54,10 @@ public class GameManager : MonoBehaviour
     private Transform initialPlatform;
     private readonly int maxChance = 11;
     private bool isFirstTime = true;
+    private bool wasReset;
     private SpriteRenderer playerSP;
     private PlatformController previusPlatform;
+    private PlatformController currentPlatform;
     #endregion PRIVATE_FIELDS
 
     #region UNITY_EVENTS
@@ -162,23 +164,23 @@ public class GameManager : MonoBehaviour
     private void InstantiatePiece(GameObject go)
     {
         //instantiate piece
-        PlatformController clone = Instantiate(go , piecesParent).GetComponent<PlatformController>();
-        clone.Initialize();
+        currentPlatform = Instantiate(go , piecesParent).GetComponent<PlatformController>();
+        currentPlatform.Initialize();
 
         //set random colors
-        for(int n = 0 ; n < clone.transform.childCount ; n++)
+        for (int n = 0; n < currentPlatform.transform.childCount; n++)
         {
-            SpriteRenderer sprite = clone.transform.GetChild(n).GetComponent<SpriteRenderer>();
+            SpriteRenderer sprite = currentPlatform.transform.GetChild(n).GetComponent<SpriteRenderer>();
             sprite.color = GetRandomColor();    
         }
 
         //if is the first time set the height and put it to 0
         if (isFirstTime)
         {
-            UpdateHeight(clone.height / 2.0f);
+            UpdateHeight(currentPlatform.height / 2.0f);
             isFirstTime = false;
 
-            if (clone.isVertical)
+            if (currentPlatform.isVertical)
                 UpdateHeight(0.4f);            
 
         }
@@ -186,11 +188,11 @@ public class GameManager : MonoBehaviour
 
         if (previusPlatform != null)
         {
-            if (!previusPlatform.isVertical && clone.isVertical)
+            if (!previusPlatform.isVertical && currentPlatform.isVertical)
                 UpdateHeight((previusPlatform.height / 2) + 0.15f);
-            else if (previusPlatform.isVertical && clone.isVertical)
+            else if (previusPlatform.isVertical && currentPlatform.isVertical)
                 UpdateHeight((previusPlatform.height / 2) + 0.52f);
-            else if (previusPlatform.isVertical && !clone.isVertical)
+            else if (previusPlatform.isVertical && !currentPlatform.isVertical)
                 UpdateHeight((previusPlatform.height / 2) + 0.0f);
         }
         
@@ -199,24 +201,25 @@ public class GameManager : MonoBehaviour
         //get random
         int r = Random.Range(0, 2);
         //choose left or right
-        Vector2 pos = r == 0 ? new Vector2(player.transform.position.x + distance, height) : new Vector2(player.transform.position.x - distance, height); 
-        pos = CheckPosition(pos , clone);
-        clone.transform.localPosition = pos;
+        Vector2 pos = r == 0 ? new Vector2(player.transform.position.x + distance, height) : new Vector2(player.transform.position.x - distance, height);
+        pos = CheckPosition(pos);
+        currentPlatform.transform.localPosition = pos;
 
         //set speed
-        clone.speed = platformSpeed * (r == 0 ? -1.0f: 1.0f);
-        previusPlatform = clone;
+        currentPlatform.speed = platformSpeed * (r == 0 ? -1.0f : 1.0f);
+        previusPlatform = currentPlatform;
               
     }
 
-    private Vector2 CheckPosition(Vector2 pos , PlatformController PC)
+    private Vector2 CheckPosition(Vector2 pos)
     {
         float playerScale = player.transform.localScale.y;
         float playerHeight = player.transform.position.y - ((playerSP.bounds.size.y / 2.0f) * playerScale);
 
         if (Vector2.Distance(new Vector2(0, pos.y), new Vector2(0, playerHeight)) > errorRange)
         {
-            return new Vector2(pos.x, playerHeight + (PC.height / 2.0f));
+
+            return new Vector2(pos.x, playerHeight + (currentPlatform.height / 2.0f));            
         }            
 
         return pos;
