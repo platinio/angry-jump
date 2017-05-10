@@ -218,8 +218,11 @@ public class GameManager : MonoBehaviour
 
         if (Vector2.Distance(new Vector2(0, pos.y), new Vector2(0, playerHeight)) > errorRange)
         {
-
-            return new Vector2(pos.x, playerHeight + (currentPlatform.height + 0.1f));            
+            Debug.Log("reset");
+            if(currentPlatform.isVertical)
+                return new Vector2(pos.x, playerHeight + (currentPlatform.height + 0.1f));
+            else
+                return new Vector2(pos.x, playerHeight + (currentPlatform.height /2.0f));
         }            
 
         return pos;
