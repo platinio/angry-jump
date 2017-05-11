@@ -33,6 +33,8 @@ public class Constants : MonoBehaviour
     public Tags tags;
     [SerializeField]
     public Layers layers;
+    [SerializeField]
+    public Values values;
 
     [System.Serializable]
     public class Tags
@@ -45,6 +47,12 @@ public class Constants : MonoBehaviour
     public class Layers
     {
         public LayerMask Platform; 
+    }
+
+    [System.Serializable]
+    public class Values
+    {
+        public float createPlatformDelay;
     }
 
 }

@@ -15,6 +15,10 @@ public class GravityController : MonoBehaviour
     void Start()
     {
         speed = maxAngle / maxGravitySpeed;
+
+        Vector2 gravity = Physics2D.gravity;
+        gravity.x = 0;
+        Physics2D.gravity = gravity;
     }
 
 
@@ -23,7 +27,16 @@ public class GravityController : MonoBehaviour
         rot = Input.acceleration.x * 360.0f;
 
         if (Mathf.Abs(rot) < minAngle)
+        {
+            if (Physics2D.gravity.x != 0)
+            {
+                Vector2 gravity = Physics2D.gravity;
+                gravity.x = 0;
+                Physics2D.gravity = gravity;
+            }
+
             return;
+        }
 
         gravitySpeed = rot / speed;
         

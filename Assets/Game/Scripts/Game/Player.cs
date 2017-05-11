@@ -97,8 +97,7 @@ public class Player : MonoBehaviour
         //if we fall
         if (transform.position.y < (initialHeight - 1))
             GameManager.instance.GameOver();
-
-        Debug.Log(RB.velocity);
+                
     }
 
     void FixedUpdate()

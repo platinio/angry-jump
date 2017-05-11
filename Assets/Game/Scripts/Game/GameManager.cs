@@ -41,7 +41,8 @@ public class GameManager : MonoBehaviour
     [Tooltip("Distance in x plane betewn player and piece")]
     public int distance;
     public float height;
-          
+
+    [HideInInspector] public Transform initialPlatform;
 
     #endregion PUBLIC_FIELDS
 
@@ -49,7 +50,6 @@ public class GameManager : MonoBehaviour
     private float timer;
     private Player player;
     private Transform piecesParent;
-    private Transform initialPlatform;
     private readonly int maxChance = 11;
     private bool isFirstTime = true;
     private bool wasReset;
@@ -103,7 +103,9 @@ public class GameManager : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > delay)
             CreateRandomPiece();
-       
+
+        if (Input.GetKeyDown(KeyCode.J))
+            StartCoroutine(AlingPlatformsRoutine());
         
     }
     #endregion UNITY_EVENTS
@@ -155,6 +157,64 @@ public class GameManager : MonoBehaviour
     }
 
     
+
+    IEnumerator AlingPlatformsRoutine()
+    {
+        
+        float XPos = initialPlatform.position.x;
+        Vector2 newPos;
+
+        for (int n = 0; n < piecesParent.childCount; n++)
+        {
+            PlatformController platform = piecesParent.GetChild(n).GetComponent<PlatformController>();
+
+            if (platform.isConnected)
+            {
+                newPos = platform.transform.position;
+                newPos.x = XPos;
+                platform.transform.position = newPos;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+        
+        /*
+        PlatformController[] platforms = new PlatformController[piecesParent.childCount];
+        float XPos = initialPlatform.position.x;
+
+        for (int n = 0; n < piecesParent.childCount; n++)
+        {
+            PlatformController platform = piecesParent.GetChild(n).GetComponent<PlatformController>();
+
+            if (platform.isConnected)
+                platforms[n] = platform;              
+            
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        for (int n = 0; n < platforms.Length; n++)
+        {
+            if (platforms[n] != null)
+            {
+                Vector2 newPos = platforms[n].transform.position;
+                newPos.x = XPos;
+                platforms[n].transform.position = newPos;
+            }
+                        
+        }
+        */
+
+        Debug.Log("Player pos set");
+        newPos = player.transform.position;
+        newPos.x = XPos;
+        player.transform.position = newPos;
+
+        yield return new WaitForEndOfFrame();
+            
+    }
+
+
     #endregion PUBLIC_METHODS
 
     #region PRIVATE_METHODS
@@ -164,6 +224,8 @@ public class GameManager : MonoBehaviour
         //instantiate piece
         currentPlatform = Instantiate(go , piecesParent).GetComponent<PlatformController>();
         currentPlatform.Initialize();
+
+        
 
         //set random colors
         for (int n = 0; n < currentPlatform.transform.childCount; n++)
@@ -187,7 +249,7 @@ public class GameManager : MonoBehaviour
         if (previusPlatform != null)
         {
             if (!previusPlatform.isVertical && currentPlatform.isVertical)
-                UpdateHeight((previusPlatform.height / 2) + 0.15f);
+                UpdateHeight((previusPlatform.height / 2) + 0.12f);
             else if (previusPlatform.isVertical && currentPlatform.isVertical)
                 UpdateHeight((previusPlatform.height / 2) + 0.52f);
             else if (previusPlatform.isVertical && !currentPlatform.isVertical)
@@ -214,9 +276,8 @@ public class GameManager : MonoBehaviour
         float playerScale = player.transform.localScale.y;
         float playerHeight = player.transform.position.y - ((playerSP.bounds.size.y / 2.0f) * playerScale);
 
-        if (Vector2.Distance(new Vector2(0, pos.y), new Vector2(0, playerHeight)) > errorRange)
-        {
-            Debug.Log("reset");
+        if (Vector2.Distance(new Vector2(0, pos.y), new Vector2(0, playerHeight)) > currentPlatform.distanceToReset)
+        {            
             if(currentPlatform.isVertical)
                 return new Vector2(pos.x, playerHeight + (currentPlatform.height + 0.1f));
             else

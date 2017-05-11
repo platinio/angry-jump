@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
+
     public float speed;
     public bool isVertical;
+    public float distanceToReset;   
+    [HideInInspector] public bool isConnected;
     [HideInInspector] public float height;
     
-    private Rigidbody2D RB;
+    [HideInInspector] public Rigidbody2D RB;
     private SpriteRenderer SP;  
    
 
@@ -31,19 +34,30 @@ public class PlatformController : MonoBehaviour
     }
 
 
+
     void Update()
     {
+
+        if (transform.position.y < GameManager.instance.initialPlatform.position.y)
+            Destroy(gameObject , 3.0f);
+        
         if (speed == 0)
             return;
         if(!isVertical)
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         else
             transform.Translate(Vector2.down * speed * Time.deltaTime);
-
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
+
+        if (other.gameObject.CompareTag(Constants.instance.tags.platform))
+        {
+            if (!isConnected)
+                isConnected = !isConnected;           
+        }
+
         if (speed == 0)
             return;
 
@@ -55,9 +69,27 @@ public class PlatformController : MonoBehaviour
         {
             RB.isKinematic = false; //reactivated physics
             speed = 0;
-            GameManager.instance.UpdateHeight(height); 
-            GameManager.instance.CreateRandomPiece();//reate another piece
+            GameManager.instance.UpdateHeight(height);
+            Invoke("CreatePlatform", Constants.instance.values.createPlatformDelay);
+            //GameManager.instance.CreateRandomPiece();//reate another piece
         }
+
+        
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag(Constants.instance.tags.platform))
+        {
+            if (isConnected)
+                isConnected = !isConnected;
+           
+        }
+    }
+
+    private void CreatePlatform()
+    {
+        GameManager.instance.CreateRandomPiece();
     }
         
 	
