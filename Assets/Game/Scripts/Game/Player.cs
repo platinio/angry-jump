@@ -18,10 +18,17 @@ public class Player : MonoBehaviour
     [Header("RayCasting 2 Settings")]
     public float _offSetX;
     public float _offSetY;
-    
+
+    public Vector2 LastKnowPos
+    {
+        get { return lastKnowPos; }
+        private set { lastKnowPos = value; }
+    }
+
     #endregion PUBLIC_FIELDS
 
     #region PRIVATE_FIELDS
+    private Vector2 lastKnowPos;
     private Rigidbody2D RB;
 	private Animator anim;
     private GameObject currentPlatform;
@@ -39,6 +46,7 @@ public class Player : MonoBehaviour
             if (hit.collider == null && _hit.collider == null)
                 return false;
 
+            
             GameObject platform = hit.collider == null ? _hit.collider.gameObject : hit.collider.gameObject;
 
             if (currentPlatform != null)
@@ -56,12 +64,18 @@ public class Player : MonoBehaviour
                 //UIManager.instance.AddScore();
             }
 
+            
+            
+
 			return true;		
 		}
 	}
     #endregion PRIVATE_FIELDS
 
-
+    void Awake()
+    {
+        lastKnowPos = transform.position;
+    }
     public void Initialize()
     {
         
@@ -97,7 +111,12 @@ public class Player : MonoBehaviour
         //if we fall
         if (transform.position.y < (initialHeight - 1))
             GameManager.instance.GameOver();
-                
+
+        if (IsGrounded)
+        {
+            //update last know position
+            lastKnowPos = transform.position;
+        }
     }
 
     void FixedUpdate()

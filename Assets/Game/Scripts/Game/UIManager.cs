@@ -28,21 +28,11 @@ public class UIManager : MonoBehaviour
     #endregion SINGLETON
 
     public Text score;
-    public Text xRot;
-    public Text yRot;
-    public Text zRot;
-
+   
     private int currentScore;
 
 
-    void Update()
-    {
-
-
-        zRot.text = "Z: " + Input.acceleration.z * 360.0f;
-        xRot.text = "X: " + Input.acceleration.x * 360.0f;
-        yRot.text = "Y: " + Input.acceleration.y * 360.0f;
-    }
+   
 
     public void AddScore()
     {

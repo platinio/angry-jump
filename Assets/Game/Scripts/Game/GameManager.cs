@@ -285,7 +285,8 @@ public class GameManager : MonoBehaviour
     private Vector2 CheckPosition(Vector2 pos)
     {
         float playerScale = player.transform.localScale.y;
-        float playerHeight = player.transform.position.y - ((playerSP.bounds.size.y / 2.0f) * playerScale);
+        //float playerHeight = player.transform.position.y - ((playerSP.bounds.size.y / 2.0f) * playerScale);
+        float playerHeight = player.LastKnowPos.y - ((playerSP.bounds.size.y / 2.0f) * playerScale);
 
         if (Vector2.Distance(new Vector2(0, pos.y), new Vector2(0, playerHeight)) > currentPlatform.distanceToReset)
         {            
