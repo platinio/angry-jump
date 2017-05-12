@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     #region PUBLIC_FIELDS
     public float errorRange;
+    public float coinDistance;
+    public GameObject coinPrefab;
     public List<Color> colors;
     public float delay;
     public List<GameObject> normalPieces;
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviour
 
         //start creating platforms
         CreateRandomPiece();
-
+        CreateCoin();
     }
     void Update()
     {
@@ -104,9 +106,8 @@ public class GameManager : MonoBehaviour
         if (timer > delay)
             CreateRandomPiece();
 
-        if (Input.GetKeyDown(KeyCode.J))
-            StartCoroutine(AlingPlatformsRoutine());
         
+                
     }
     #endregion UNITY_EVENTS
 
@@ -114,6 +115,13 @@ public class GameManager : MonoBehaviour
 
     #region PUBLIC_METHODS
 
+    public void CreateCoin()
+    {
+        Vector2 coinPos = player.transform.position;
+        coinPos.y += coinDistance;
+
+        Instantiate(coinPrefab , coinPos , Quaternion.identity);
+    }
 
     public void UpdateHeight(float h)
     {
@@ -156,7 +164,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
     }
 
-    
+    public void AlingPlatforms()
+    {
+        StartCoroutine(AlingPlatformsRoutine());
+    }
 
     IEnumerator AlingPlatformsRoutine()
     {
@@ -253,7 +264,7 @@ public class GameManager : MonoBehaviour
             else if (previusPlatform.isVertical && currentPlatform.isVertical)
                 UpdateHeight((previusPlatform.height / 2) + 0.52f);
             else if (previusPlatform.isVertical && !currentPlatform.isVertical)
-                UpdateHeight((previusPlatform.height / 2) + 0.0f);
+                UpdateHeight((previusPlatform.height / 2) + 0.7f);
         }
         
         
