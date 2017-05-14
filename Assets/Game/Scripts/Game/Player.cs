@@ -117,6 +117,8 @@ public class Player : MonoBehaviour
             //update last know position
             lastKnowPos = transform.position;
         }
+
+        SetAnimParam();
     }
 
     void FixedUpdate()
@@ -164,14 +166,14 @@ public class Player : MonoBehaviour
     {
         //GameManager.instance.GameOver();
     }
-    /*
+    
     private void SetAnimParam()
     {
-        anim.SetBool("IsGrounded", IsGrounded);
-        anim.SetBool("IsFalling", RB.velocity.y < 0.1);
-        anim.SetBool("IsJumping", RB.velocity.y > 0.1);
+        anim.SetBool("Idle", IsGrounded);
+        anim.SetBool("Fall", RB.velocity.y < 0.1);
+        anim.SetBool("Jump", RB.velocity.y > 0.1);
     }
-    */
+    
     //
     void OnDrawGizmosSelected()
     {
