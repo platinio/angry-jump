@@ -25,12 +25,12 @@ public class SocialSharingManager : MonoBehaviour
 
     public void TwitterDefaultShare()
     {
-        AndroidSocialGate.StartShareIntent(shareTitle, shareContent , defaultImageToShare, "twi");
+        AndroidSocialGate.StartShareIntent(shareTitle, shareContent  + " " + playStoreURL, defaultImageToShare, "twi");
     }
 
     public void NativeSharing()
     {
-        AndroidSocialGate.StartShareIntent(shareTitle, shareContent, defaultImageToShare);
+        AndroidSocialGate.StartShareIntent(shareTitle, shareContent + " " + playStoreURL, defaultImageToShare);
     }
 
     public void OnFacebookPackageCheckResult(AN_PackageCheckResult res)
@@ -38,7 +38,7 @@ public class SocialSharingManager : MonoBehaviour
         if(res.IsSucceeded)
         {
             //if is installed lest shared it
-            AndroidSocialGate.StartShareIntent(shareTitle, shareContent, defaultImageToShare, "facebook.katana");
+            AndroidSocialGate.StartShareIntent(shareTitle, shareContent + " " + playStoreURL, defaultImageToShare, "facebook.katana");
         }
 
         else
