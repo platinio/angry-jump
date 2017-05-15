@@ -8,6 +8,7 @@ public class ShopManager : MonoBehaviour
 
     private Vector3 startPosition;
     private bool processingAnimation;
+    private bool isOpen;
 
     void Start()
     {
@@ -16,6 +17,10 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShop()
     {
+        if (isOpen)
+            return;
+
+        isOpen = true;
         processingAnimation = true;
         LeanTween.moveY(shopWindow, 0, 2.0f).setEase(LeanTweenType.easeOutElastic).setOnComplete(() => { processingAnimation = false; }); ;
     }
@@ -25,6 +30,7 @@ public class ShopManager : MonoBehaviour
         if (processingAnimation)
             return;
 
+        isOpen = false;
         LeanTween.moveY(shopWindow, -1100, 0.3f).setOnComplete(() => { shopWindow.anchoredPosition3D = startPosition; });
     }
 
