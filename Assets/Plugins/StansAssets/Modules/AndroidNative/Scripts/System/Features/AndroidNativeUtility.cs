@@ -8,7 +8,7 @@ public class AndroidNativeUtility : SA.Common.Pattern.Singleton<AndroidNativeUti
 	
 
 	//Actions
-	public static event Action<AN_PackageCheckResult> OnPackageCheckResult = delegate{};
+    public static event Action<AN_PackageCheckResult> OnPackageCheckResult = delegate {};
 	public static event Action<string> OnAndroidIdLoaded = delegate{};
 
 	public static event Action<string> InternalStoragePathLoaded = delegate{};

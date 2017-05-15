@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: db9a26d3edd141043b9b505a102bb1f7
+timeCreated: 1494773404
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Jan Brady
+  fontNames:
+  - Jan Brady
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b6fce9039c7f167488b1007605fb1ca8, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
