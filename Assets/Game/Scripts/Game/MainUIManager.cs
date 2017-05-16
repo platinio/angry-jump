@@ -2,15 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainUIManager : MonoBehaviour {
+public class MainUIManager : MonoBehaviour 
+{
+    #region SINGLETON
+    private static MainUIManager mainUIManager;
+    public static MainUIManager instance
+    {
+        get
+        {
+            if (!mainUIManager)
+            {
+                mainUIManager = FindObjectOfType(typeof(MainUIManager)) as MainUIManager;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+
+                if (!mainUIManager)
+                    Debug.LogError("You need to have a MainUIManager script active in the scene");
+            }
+
+            return mainUIManager;
+        }
+
+    }
+    #endregion SINGLETON
+
+    public List<>
+
+
 }
