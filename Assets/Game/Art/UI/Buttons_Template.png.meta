@@ -1,0 +1,854 @@
+fileFormatVersion: 2
+guid: fa4dd1c87bff5d34fa9db2836ed7ef89
+timeCreated: 1494945059
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Buttons_Template_0
+    21300002: Buttons_Template_1
+    21300004: Buttons_Template_2
+    21300006: Buttons_Template_3
+    21300008: Buttons_Template_4
+    21300010: Buttons_Template_5
+    21300012: Buttons_Template_6
+    21300014: Buttons_Template_7
+    21300016: Buttons_Template_8
+    21300018: Buttons_Template_9
+    21300020: Buttons_Template_10
+    21300022: Buttons_Template_11
+    21300024: Buttons_Template_12
+    21300026: Buttons_Template_13
+    21300028: Buttons_Template_14
+    21300030: Buttons_Template_15
+    21300032: Buttons_Template_16
+    21300034: Buttons_Template_17
+    21300036: Buttons_Template_18
+    21300038: Buttons_Template_19
+    21300040: Buttons_Template_20
+    21300042: Buttons_Template_21
+    21300044: Buttons_Template_22
+    21300046: Buttons_Template_23
+    21300048: Buttons_Template_24
+    21300050: Buttons_Template_25
+    21300052: Buttons_Template_26
+    21300054: Buttons_Template_27
+    21300056: Buttons_Template_28
+    21300058: Buttons_Template_29
+    21300060: Buttons_Template_30
+    21300062: Buttons_Template_31
+    21300064: Buttons_Template_32
+    21300066: Buttons_Template_33
+    21300068: Buttons_Template_34
+    21300070: Buttons_Template_35
+    21300072: Buttons_Template_36
+    21300074: Buttons_Template_37
+    21300076: Buttons_Template_38
+    21300078: Buttons_Template_39
+    21300080: Buttons_Template_40
+    21300082: Buttons_Template_41
+    21300084: Buttons_Template_42
+    21300086: Buttons_Template_43
+    21300088: Buttons_Template_44
+    21300090: Buttons_Template_45
+    21300092: Buttons_Template_46
+    21300094: Buttons_Template_47
+    21300096: Buttons_Template_48
+    21300098: Buttons_Template_49
+    21300100: Buttons_Template_50
+    21300102: Buttons_Template_51
+    21300104: Buttons_Template_52
+    21300106: Buttons_Template_53
+    21300108: Buttons_Template_54
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Buttons_Template_0
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 1816
+        width: 129
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_1
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 1816
+        width: 131
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_2
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 1816
+        width: 129
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_3
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 1816
+        width: 129
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_4
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 1816
+        width: 130
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_5
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 1816
+        width: 206
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_6
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 1816
+        width: 207
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_7
+      rect:
+        serializedVersion: 2
+        x: 1465
+        y: 1816
+        width: 206
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_8
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 1816
+        width: 208
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_9
+      rect:
+        serializedVersion: 2
+        x: 1964
+        y: 1816
+        width: 208
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_10
+      rect:
+        serializedVersion: 2
+        x: 2296
+        y: 1794
+        width: 93
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_11
+      rect:
+        serializedVersion: 2
+        x: 2426
+        y: 1794
+        width: 92
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_12
+      rect:
+        serializedVersion: 2
+        x: 2555
+        y: 1794
+        width: 93
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_13
+      rect:
+        serializedVersion: 2
+        x: 2684
+        y: 1794
+        width: 93
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_14
+      rect:
+        serializedVersion: 2
+        x: 2814
+        y: 1794
+        width: 92
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_15
+      rect:
+        serializedVersion: 2
+        x: 3007
+        y: 1787
+        width: 107
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_16
+      rect:
+        serializedVersion: 2
+        x: 3138
+        y: 1787
+        width: 108
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_17
+      rect:
+        serializedVersion: 2
+        x: 3270
+        y: 1787
+        width: 109
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_18
+      rect:
+        serializedVersion: 2
+        x: 3402
+        y: 1787
+        width: 110
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_19
+      rect:
+        serializedVersion: 2
+        x: 3534
+        y: 1787
+        width: 110
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_20
+      rect:
+        serializedVersion: 2
+        x: 4169
+        y: 1575
+        width: 358
+        height: 363
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_21
+      rect:
+        serializedVersion: 2
+        x: 4567
+        y: 1575
+        width: 356
+        height: 363
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_22
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 1594
+        width: 456
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_23
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 1594
+        width: 457
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_24
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 1594
+        width: 457
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_25
+      rect:
+        serializedVersion: 2
+        x: 1588
+        y: 1594
+        width: 459
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_26
+      rect:
+        serializedVersion: 2
+        x: 2094
+        y: 1594
+        width: 456
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_27
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 1383
+        width: 657
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_28
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 1383
+        width: 657
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_29
+      rect:
+        serializedVersion: 2
+        x: 1449
+        y: 1383
+        width: 657
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_30
+      rect:
+        serializedVersion: 2
+        x: 2135
+        y: 1383
+        width: 657
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_31
+      rect:
+        serializedVersion: 2
+        x: 2821
+        y: 1383
+        width: 657
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_32
+      rect:
+        serializedVersion: 2
+        x: 3773
+        y: 1121
+        width: 358
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_33
+      rect:
+        serializedVersion: 2
+        x: 4169
+        y: 1122
+        width: 358
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_34
+      rect:
+        serializedVersion: 2
+        x: 4567
+        y: 1122
+        width: 356
+        height: 361
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_35
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 1139
+        width: 564
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_36
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 1139
+        width: 564
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_37
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1139
+        width: 564
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_38
+      rect:
+        serializedVersion: 2
+        x: 2213
+        y: 1139
+        width: 564
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_39
+      rect:
+        serializedVersion: 2
+        x: 2926
+        y: 1139
+        width: 564
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_40
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 929
+        width: 908
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_41
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 929
+        width: 908
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_42
+      rect:
+        serializedVersion: 2
+        x: 2047
+        y: 929
+        width: 906
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_43
+      rect:
+        serializedVersion: 2
+        x: 3031
+        y: 929
+        width: 908
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_44
+      rect:
+        serializedVersion: 2
+        x: 4015
+        y: 929
+        width: 908
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_45
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 756
+        width: 781
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_46
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 756
+        width: 781
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_47
+      rect:
+        serializedVersion: 2
+        x: 2047
+        y: 756
+        width: 779
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_48
+      rect:
+        serializedVersion: 2
+        x: 3031
+        y: 756
+        width: 779
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_49
+      rect:
+        serializedVersion: 2
+        x: 4015
+        y: 756
+        width: 781
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_50
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 38
+        width: 908
+        height: 632
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_51
+      rect:
+        serializedVersion: 2
+        x: 1046
+        y: 38
+        width: 906
+        height: 632
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_52
+      rect:
+        serializedVersion: 2
+        x: 2013
+        y: 38
+        width: 908
+        height: 632
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_53
+      rect:
+        serializedVersion: 2
+        x: 2982
+        y: 38
+        width: 906
+        height: 632
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Buttons_Template_54
+      rect:
+        serializedVersion: 2
+        x: 3949
+        y: 38
+        width: 908
+        height: 632
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

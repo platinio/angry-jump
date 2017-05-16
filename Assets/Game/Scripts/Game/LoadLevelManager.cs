@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class LoadLevelManager : MonoBehaviour
 {
@@ -52,6 +53,7 @@ public class LoadLevelManager : MonoBehaviour
 
     }
 
+   
     private void UpdateProgressBar()
     {
         loadBar.value = progress;

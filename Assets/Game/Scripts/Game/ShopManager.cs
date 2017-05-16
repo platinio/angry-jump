@@ -16,11 +16,7 @@ public class ShopManager : MonoBehaviour
     private const string PRODUCT_LIVEX20 = "livex20";
 
 
-    void Awake()
-    {
-        GooglePlayConnection.Instance.Connect();
-    }
-
+  
     void Start()
     {
         //listening for Purchase and consume events
