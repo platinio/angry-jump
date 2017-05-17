@@ -26,7 +26,7 @@ public class MainUIManager : MonoBehaviour
     }
     #endregion SINGLETON
 
-    public List<>
+    
 
 
 }

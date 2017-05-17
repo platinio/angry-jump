@@ -28,7 +28,7 @@ public class ShopManager : MonoBehaviour
 
         AndroidInAppPurchaseManager.Client.Connect();
 
-        startPosition = shopWindow.anchoredPosition3D;
+        //startPosition = shopWindow.anchoredPosition3D;
     }
 
     public void OpenShop()

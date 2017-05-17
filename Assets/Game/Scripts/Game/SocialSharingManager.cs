@@ -2,38 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SocialSharingManager : MonoBehaviour
+/* code for social sharing*/
+
+public static class SocialSharingManager 
 {
-    public Texture2D defaultImageToShare;
-
-    private readonly string playStoreURL = "Insert URL here";
-    private readonly string shareTitle = "Share me!";
-    private readonly string shareContent = "Play this awesome game!";
-   
-
-    void Start()
+    private static Texture2D defaultImageToShare
     {
-        
+        get 
+        { 
+
+            if(_defaultImageToShare == null)
+                _defaultImageToShare = Resources.Load("SocialShare/MainMenu") as Texture2D;
+            return _defaultImageToShare;
+        }
+        set { _defaultImageToShare = value; }
     }
 
-    public void FacebookDefaultShare()
+    private static Texture2D _defaultImageToShare;
+
+    private static readonly string playStoreURL = "Insert URL here";
+    private static readonly string shareTitle = "Share me!";
+    private static readonly string shareContent = "Play this awesome game!";
+   
+
+    
+    public static void FacebookDefaultShare()
     {
+        
         //first check if android is installed
         AndroidNativeUtility.OnPackageCheckResult += OnFacebookPackageCheckResult;
         AndroidNativeUtility.Instance.CheckIsPackageInstalled("com.facebook.katana");        
     }
 
-    public void TwitterDefaultShare()
+    public static void TwitterDefaultShare()
     {
         AndroidSocialGate.StartShareIntent(shareTitle, shareContent  + " " + playStoreURL, defaultImageToShare, "twi");
     }
 
-    public void NativeSharing()
+    public static void NativeSharing()
     {
         AndroidSocialGate.StartShareIntent(shareTitle, shareContent + " " + playStoreURL, defaultImageToShare);
     }
 
-    public void OnFacebookPackageCheckResult(AN_PackageCheckResult res)
+    private static void OnFacebookPackageCheckResult(AN_PackageCheckResult res)
     {
         if(res.IsSucceeded)
         {
