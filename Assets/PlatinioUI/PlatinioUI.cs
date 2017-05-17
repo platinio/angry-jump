@@ -29,7 +29,7 @@ public class PlatinioUI : MonoBehaviour
     }
     #endregion SINGLETON
 
-
+    public event Action OnAnimationComplete = delegate { };
     public RectTransform canvasRect;
     public UIScreen initialScreen;
     public float horizontalOffset;
@@ -127,6 +127,7 @@ public class PlatinioUI : MonoBehaviour
                         OnComplete();
                     Destroy(screenToDelete);
                     currentScreen.UpdateElementsPos();
+                    OnAnimationComplete();
                 });
             }
 
@@ -138,6 +139,7 @@ public class PlatinioUI : MonoBehaviour
                         OnComplete();
                     Destroy(screenToDelete);
                     currentScreen.UpdateElementsPos();
+                    OnAnimationComplete();
                 });
             }
 
@@ -153,6 +155,7 @@ public class PlatinioUI : MonoBehaviour
                         OnComplete();
                     Destroy(screenToDelete);
                     currentScreen.UpdateElementsPos();
+                    OnAnimationComplete();
                 });
             }
 
@@ -164,6 +167,7 @@ public class PlatinioUI : MonoBehaviour
                         OnComplete();
                     Destroy(screenToDelete);
                     currentScreen.UpdateElementsPos();
+                    OnAnimationComplete();
                 });
             }
         }
