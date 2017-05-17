@@ -37,8 +37,8 @@ public class CharacterSelection : MonoBehaviour
         beforeItem.transform.localScale = Vector3.one;
         beforeItem.transform.position = new Vector3(-PlatinioUI.instance.horizontalOffset, 0, 0);
 
-        
-        
+
+        PlatinioUI.instance.OnAnimationComplete -= Initialize;
     }
 
     public void MoveToNext()
