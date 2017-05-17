@@ -52,7 +52,7 @@ public class UIElement : MonoBehaviour
     }
 
 
-    public void Show()
+    public void Show(Action OnComplete = null)
     {
         if(isBusy)
             return;
@@ -67,6 +67,8 @@ public class UIElement : MonoBehaviour
                 gameObject.SetActive(true);
                 LeanTween.moveY(gameObject, targetPos.y, entryAnimationTime).setEase(ease).setOnComplete(() =>
                     {
+                        if (OnComplete != null)
+                            OnComplete();
                         isBusy = false;
                     });
                 break;
@@ -75,6 +77,8 @@ public class UIElement : MonoBehaviour
                 gameObject.SetActive(true);
                 LeanTween.moveX(gameObject, targetPos.x, entryAnimationTime).setEase(ease).setOnComplete(() =>
                     {
+                        if (OnComplete != null)
+                            OnComplete();
                         isBusy = false;
                     });
                 break;
@@ -83,6 +87,8 @@ public class UIElement : MonoBehaviour
                 gameObject.SetActive(true);
                 LeanTween.moveX(gameObject, targetPos.x, entryAnimationTime).setEase(ease).setOnComplete(() =>
                     {
+                        if (OnComplete != null)
+                            OnComplete();
                         isBusy = false;
                     });
                 break;
@@ -91,13 +97,15 @@ public class UIElement : MonoBehaviour
                 gameObject.SetActive(true);
                 LeanTween.moveY(gameObject, targetPos.y, entryAnimationTime).setEase(ease).setOnComplete(() =>
                     {
+                        if (OnComplete != null)
+                            OnComplete();
                         isBusy = false;
                     });
                 break;
         }
     }
 
-    public void Hide()
+    public void Hide(Action OnComplete = null)
     {
         if (isBusy)
             return;
@@ -110,6 +118,8 @@ public class UIElement : MonoBehaviour
             case PlatinioUI.Direction.BOTTOM:
                 LeanTween.moveY(gameObject, -platinioUI.verticalOffset, entryAnimationTime).setEase(ease).setOnComplete(() =>
                 {
+                    if (OnComplete != null)
+                        OnComplete();
                     isBusy = false;
                     gameObject.SetActive(false);
                 });
@@ -125,6 +135,8 @@ public class UIElement : MonoBehaviour
             case PlatinioUI.Direction.RIGHT:
                 LeanTween.moveX(gameObject, platinioUI.horizontalOffset, entryAnimationTime).setEase(ease).setOnComplete(() =>
                 {
+                    if (OnComplete != null)
+                        OnComplete();
                     isBusy = false;
                     gameObject.SetActive(false);
                 });
@@ -132,6 +144,8 @@ public class UIElement : MonoBehaviour
             case PlatinioUI.Direction.UP:
                 LeanTween.moveY(gameObject, platinioUI.verticalOffset, entryAnimationTime).setEase(ease).setOnComplete(() =>
                 {
+                    if (OnComplete != null)
+                        OnComplete();
                     isBusy = false;
                     gameObject.SetActive(false);
                 });

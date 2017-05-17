@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class UIScreen : MonoBehaviour 
 {
@@ -25,6 +26,7 @@ public class UIScreen : MonoBehaviour
     public UIScreen before;
     public UIScreen next;
     public List<UIElement> elements;
+    public event Action OnAnimationComplete = delegate{};
 
     void Start()
     {
@@ -35,13 +37,6 @@ public class UIScreen : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            ShowAll();
-        if (Input.GetKeyDown(KeyCode.S))
-            HideAll();
-    }
 
     public void UpdateElementsPos()
     {
@@ -57,7 +52,7 @@ public class UIScreen : MonoBehaviour
         {
             if (elements[n].gameObject.name == name)
             {
-                elements[n].Show();
+                elements[n].Show(OnAnimationComplete);
             }
                 
         }
@@ -67,7 +62,7 @@ public class UIScreen : MonoBehaviour
     {
         for (int n = 0; n < elements.Count; n++)
         {
-            elements[n].Show();
+            elements[n].Show(OnAnimationComplete);
         }
         
     }
@@ -77,7 +72,7 @@ public class UIScreen : MonoBehaviour
         for (int n = 0; n < elements.Count; n++)
         {
             if (elements[n].gameObject.name == name)
-                elements[n].Hide();       
+                elements[n].Hide(OnAnimationComplete);       
 
         }
     }
@@ -86,7 +81,7 @@ public class UIScreen : MonoBehaviour
     {
         for (int n = 0; n < elements.Count; n++)
         {
-            elements[n].Hide();
+            elements[n].Hide(OnAnimationComplete);
         }
     }
 

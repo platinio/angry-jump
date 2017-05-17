@@ -89,16 +89,19 @@ public class ShopManager : MonoBehaviour
 
     private static void OnProcessingConsumeProduct(BillingResult purchase)
     {
+
+        int currentLives = PlayerPrefs.GetInt("lives");
+
         switch (purchase.Purchase.SKU)
         {
             case PRODUCT_LIVEX5:
-                //add lives
+                PlayerPrefs.SetInt("lives" , currentLives + 5);
                 break;
             case PRODUCT_LIVEX10:
-                //add lives
+                PlayerPrefs.SetInt("lives", currentLives + 10);
                 break;
             case PRODUCT_LIVEX20:
-                //add lives                
+                PlayerPrefs.SetInt("lives", currentLives + 20);            
                 break;
         }
     }

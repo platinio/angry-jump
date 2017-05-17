@@ -9,7 +9,7 @@ public class CharacterSelection : MonoBehaviour
     public float animTime;
     public LeanTweenType ease;
 
-    private int currentSelection;
+    public int currentSelection;
     private GameObject beforeItem;
     private GameObject currentItem;
     private GameObject nextItem;
@@ -20,6 +20,7 @@ public class CharacterSelection : MonoBehaviour
         PlatinioUI.instance.OnAnimationComplete += Initialize;
     }
 
+    
     public void Initialize()
     {
         currentItem = Instantiate(items[currentSelection] , window.transform) as GameObject;
