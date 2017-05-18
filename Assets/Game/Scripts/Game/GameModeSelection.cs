@@ -10,16 +10,46 @@ public class GameModeSelection : MonoBehaviour
     public Button hardModeButton;
     public Button backButton;
 
-    private UIScreen screen;
+    public Slider loadBar;
 
+    private UIScreen screen;
+    private LoadLevelManager loadLevelManager;
 
     void Start()
-    { 
-        easyModeButton.onClick.AddListener(delegate { GameSettings.gameMode = GameSettings.GameMode.EASY; });
-        mediumModeButton.onClick.AddListener(delegate { GameSettings.gameMode = GameSettings.GameMode.MEDIUM; });
-        hardModeButton.onClick.AddListener(delegate { GameSettings.gameMode = GameSettings.GameMode.HARD; });
+    {
+
+        loadLevelManager = GameObject.FindObjectOfType<LoadLevelManager>() as LoadLevelManager;
+
+        //set elements
+        loadLevelManager.elementsToDeactivated.Add(easyModeButton.gameObject);
+        loadLevelManager.elementsToDeactivated.Add(mediumModeButton.gameObject);
+        loadLevelManager.elementsToDeactivated.Add(hardModeButton.gameObject);
+        loadLevelManager.elementsToDeactivated.Add(backButton.gameObject);
+
+        loadLevelManager.loadBar = loadBar;
+
+        easyModeButton.onClick.AddListener(delegate 
+        { 
+            GameSettings.gameMode = GameSettings.GameMode.EASY;
+            loadLevelManager.LoadLevel("Game");
+ 
+        });
+        mediumModeButton.onClick.AddListener(delegate 
+        { 
+            GameSettings.gameMode = GameSettings.GameMode.MEDIUM;
+            loadLevelManager.LoadLevel("Game");
+        });
+        hardModeButton.onClick.AddListener(delegate 
+        { 
+            GameSettings.gameMode = GameSettings.GameMode.HARD;
+            loadLevelManager.LoadLevel("Game");
+        });
         
-        backButton.onClick.AddListener(delegate { PlatinioUI.instance.MoveToBack(); });
+        backButton.onClick.AddListener(delegate 
+        {
+            PlatinioUI.instance.MoveToBack(); 
+
+        });
 
         screen = GetComponent<UIScreen>();
         PlatinioUI.instance.OnAnimationComplete += ShowButtons;
