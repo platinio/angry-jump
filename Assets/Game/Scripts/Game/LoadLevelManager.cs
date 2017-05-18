@@ -14,6 +14,12 @@ public class LoadLevelManager : MonoBehaviour
 
     private float progress;
 
+    void Start()
+    {
+        //set fps to 30
+        Application.targetFrameRate = 30;
+    }
+
     public void LoadLevel(string name)
     {
         if (Time.timeScale != 1)
