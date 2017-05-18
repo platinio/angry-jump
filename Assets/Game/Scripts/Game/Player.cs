@@ -7,6 +7,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     #region PUBLIC_FIELDS
+
+    public int frameGroundedUpdate;
+
     [Header("Player Settings")]
 	public float jumpForce;
     public float rayLength;
@@ -28,6 +31,7 @@ public class Player : MonoBehaviour
     #endregion PUBLIC_FIELDS
 
     #region PRIVATE_FIELDS
+    private int currentFrame;
     private Vector2 lastKnowPos;
     private Rigidbody2D RB;
 	private Animator anim;
@@ -88,6 +92,18 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        currentFrame++;
+        if (currentFrame > frameGroundedUpdate)
+        {
+            if (IsGrounded)
+            {
+                //update last know position
+                lastKnowPos = transform.position;
+                currentFrame = 0;
+            }
+        }
+            
+
         //if we are running on a pc, web or testing from editor
         #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         if (Input.GetButtonDown("Jump"))
@@ -112,11 +128,7 @@ public class Player : MonoBehaviour
         if (transform.position.y < (initialHeight - 1))
             GameManager.instance.GameOver();
 
-        if (IsGrounded)
-        {
-            //update last know position
-            lastKnowPos = transform.position;
-        }
+       
 
         SetAnimParam();
     }
