@@ -43,10 +43,22 @@ public class PlatformController : MonoBehaviour
         
         if (speed == 0)
             return;
-        if(!isVertical)
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
+        if (!isVertical)
+        {
+            //transform.Translate(Vector2.left * speed * Time.deltaTime);
+            Vector2 newPos = transform.position;
+            newPos -= Vector2.left * speed * Time.deltaTime; 
+            RB.MovePosition(newPos);
+        }
+
         else
-            transform.Translate(Vector2.down * speed * Time.deltaTime);
+        {
+            //transform.Translate(Vector2.down * speed * Time.deltaTime);
+            Vector2 newPos = transform.position;
+            newPos -= Vector2.left * speed * Time.deltaTime; 
+            RB.MovePosition(newPos);
+        }
+            
     }
 
     void OnCollisionEnter2D(Collision2D other)
