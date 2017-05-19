@@ -20,6 +20,7 @@ public class GameModeSelection : MonoBehaviour
 
         loadLevelManager = GameObject.FindObjectOfType<LoadLevelManager>() as LoadLevelManager;
 
+        loadLevelManager.elementsToDeactivated = new List<GameObject>();
         //set elements
         loadLevelManager.elementsToDeactivated.Add(easyModeButton.gameObject);
         loadLevelManager.elementsToDeactivated.Add(mediumModeButton.gameObject);
