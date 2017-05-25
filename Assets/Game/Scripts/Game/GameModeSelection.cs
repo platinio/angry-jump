@@ -14,6 +14,7 @@ public class GameModeSelection : MonoBehaviour
 
     private UIScreen screen;
     private LoadLevelManager loadLevelManager;
+    private bool endAnimation;
 
     void Start()
     {
@@ -30,18 +31,34 @@ public class GameModeSelection : MonoBehaviour
         loadLevelManager.loadBar = loadBar;
 
         easyModeButton.onClick.AddListener(delegate 
-        { 
+        {
+            if (!endAnimation)
+            {
+                endAnimation = !endAnimation;
+                PlatinioUI.instance.OnAnimationComplete -= TriggerMediumButtonAnim;
+                PlatinioUI.instance.OnAnimationComplete -= TriggerHardButtonAnim;
+            }
+
+                          
+                
             GameSettings.gameMode = GameSettings.GameMode.EASY;
             loadLevelManager.LoadLevel("Game");
  
         });
         mediumModeButton.onClick.AddListener(delegate 
-        { 
+        {
+            if (!endAnimation)
+            {
+                endAnimation = !endAnimation;
+                PlatinioUI.instance.OnAnimationComplete -= TriggerHardButtonAnim;
+            }
             GameSettings.gameMode = GameSettings.GameMode.MEDIUM;
             loadLevelManager.LoadLevel("Game");
         });
         hardModeButton.onClick.AddListener(delegate 
-        { 
+        {
+            if (!endAnimation)
+                endAnimation = !endAnimation;
             GameSettings.gameMode = GameSettings.GameMode.HARD;
             loadLevelManager.LoadLevel("Game");
         });
@@ -67,16 +84,22 @@ public class GameModeSelection : MonoBehaviour
    
     public void TriggerMediumButtonAnim()
     {
+        if (endAnimation)
+            return;
+
         screen.OnAnimationComplete += TriggerHardButtonAnim;
-        screen.OnAnimationComplete -= TriggerMediumButtonAnim;  
+        screen.OnAnimationComplete -= TriggerMediumButtonAnim;
         screen.ShowElement("Medium");           
 
     }
 
     public void TriggerHardButtonAnim()
     {
-        screen.OnAnimationComplete -= TriggerHardButtonAnim;
-        screen.ShowElement("Hard");        
+        if (endAnimation)
+            return;
+
+       screen.OnAnimationComplete -= TriggerHardButtonAnim;
+       screen.ShowElement("Hard");        
     }
 
     private void SetButtonReferences()
