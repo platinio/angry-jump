@@ -29,10 +29,10 @@ public class UIManager : MonoBehaviour
 
     public Text score;
    
+
     private int currentScore;
 
 
-   
 
     public void AddScore()
     {

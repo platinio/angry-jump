@@ -24,7 +24,7 @@ public class UIElement : MonoBehaviour
     public PlatinioUI.Direction exitTo;
     public PlatinioUI.Animation exitAnimation;
     public float exitAnimationTime;
-    public bool isBusy;
+    [HideInInspector] public bool isBusy;
 
     private RectTransform _rect;
     private Vector2 targetPos;

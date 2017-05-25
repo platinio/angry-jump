@@ -32,6 +32,7 @@ public class PlatinioUI : MonoBehaviour
     public event Action OnAnimationComplete = delegate { };
     public RectTransform canvasRect;
     public UIScreen initialScreen;
+    public bool triggerInitial;
     public float horizontalOffset;
     public float verticalOffset;
     
@@ -64,15 +65,36 @@ public class PlatinioUI : MonoBehaviour
 
     void Awake()
     {
-        GameObject clone = Instantiate(initialScreen.gameObject , Vector3.zero , Quaternion.identity) as GameObject;
-        clone.transform.parent = canvasRect;
-        clone.transform.localScale = Vector3.one;        
+        //we can no start if we dont have a canvas 
+        if (canvasRect == null)
+        {
+            Debug.LogWarning("Canvas no assigned in isnpector, findin one");
+            Canvas canvas = GameObject.FindObjectOfType<Canvas>();
 
-        nextScreen = initialScreen.next;
-        currentScreen = clone.GetComponent<UIScreen>();
-        beforeScreen = initialScreen.before;
+            if (canvas == null)
+            {
+                Debug.LogError("Canvas no found in scene please add one or remove PlatinioUI from current scene because is no being used");
+                Application.Quit();
+            }
+            else            
+                canvasRect = canvas.GetComponent<RectTransform>();
+            
+        }
 
-        currentScreen.rect.sizeDelta = new Vector2(1.0f , 1.0f);
+        //if we dont use a initial screen, maybe we just want to use aniamtions for external windows
+        if (initialScreen != null)
+        {
+            GameObject clone = Instantiate(initialScreen.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+            clone.transform.parent = canvasRect;
+            clone.transform.localScale = Vector3.one;
+
+            nextScreen = initialScreen.next;
+            currentScreen = clone.GetComponent<UIScreen>();
+            beforeScreen = initialScreen.before;
+
+            currentScreen.rect.sizeDelta = new Vector2(1.0f, 1.0f);
+        }
+
 
     }
 
