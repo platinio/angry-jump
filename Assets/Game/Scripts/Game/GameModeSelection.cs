@@ -39,9 +39,9 @@ public class GameModeSelection : MonoBehaviour
                 PlatinioUI.instance.OnAnimationComplete -= TriggerHardButtonAnim;
             }
 
-                          
-                
-            GameSettings.gameMode = GameSettings.GameMode.EASY;
+
+
+            GameSettings.gameMode = GameMode.EASY;
             loadLevelManager.LoadLevel("Game");
  
         });
@@ -52,14 +52,14 @@ public class GameModeSelection : MonoBehaviour
                 endAnimation = !endAnimation;
                 PlatinioUI.instance.OnAnimationComplete -= TriggerHardButtonAnim;
             }
-            GameSettings.gameMode = GameSettings.GameMode.MEDIUM;
+            GameSettings.gameMode = GameMode.MEDIUM;
             loadLevelManager.LoadLevel("Game");
         });
         hardModeButton.onClick.AddListener(delegate 
         {
             if (!endAnimation)
                 endAnimation = !endAnimation;
-            GameSettings.gameMode = GameSettings.GameMode.HARD;
+            GameSettings.gameMode = GameMode.HARD;
             loadLevelManager.LoadLevel("Game");
         });
         

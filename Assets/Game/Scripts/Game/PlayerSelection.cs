@@ -18,7 +18,7 @@ public class PlayerSelection : MonoBehaviour
         backButton.onClick.AddListener(delegate { PlatinioUI.instance.MoveToBack(); });
         choosePlayerButton.onClick.AddListener(delegate 
         {
-            GameSettings.characterSelected = (GameSettings.CharacterSelected)characterSelection.currentSelection;
+            GameSettings.characterSelected = (CharacterSelected)characterSelection.currentSelection;
             PlatinioUI.instance.MoveToNext(); 
         });
     }

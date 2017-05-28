@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// ========================================= //
+// Name: GameManager.cs
+// Description: Controls game flow, instantiate new platforms, and decides positions
+// ========================================= //
 public class GameManager : MonoBehaviour
 {
+    //singleton
     #region SINGLETON
     private static GameManager gameManager;
     public static GameManager instance
@@ -38,14 +43,10 @@ public class GameManager : MonoBehaviour
     public List<GameObject> damagePieces;
     public float platformSpeed;
     public float platformOffset;
-    [Range(0,100)]
-    public int chanceToNormal;
-    [Tooltip("Distance in x plane betewn player and piece")]
-    public int distance;
+    [Range(0,100)] public int chanceToNormal;
+    [Tooltip("Distance in x plane betewn player and piece")] public int distance;
     public float height;
-
     [HideInInspector] public Transform initialPlatform;
-
     #endregion PUBLIC_FIELDS
 
     #region PRIVATE_FIELDS    
@@ -67,11 +68,17 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindObjectOfType<Player>();
 
         if (player == null)
-            Debug.LogError("Player no found in current scene");
+        {
+            Debug.LogError("GameManagerError: Player no found in current scene");
+            //if we are in editor end game
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #endif
+        }
+            
 
         //create piecesParent
         piecesParent = new GameObject("PiecesParent").transform;
-
         //initial platform
         initialPlatform = GameObject.Find("SmallPlatform").transform;
     }
@@ -88,33 +95,30 @@ public class GameManager : MonoBehaviour
         //initilize values
         //get the initial height
         playerSP = player.GetComponent<SpriteRenderer>();
-        ResetHeight();
-              
-                
+        //Initialize height to 0
+        ResetHeight();             
+        //reduce to %        
         chanceToNormal /= 10;
-
         player.Initialize();
-
         //start creating platforms
         CreateRandomPiece();
+        //create a initial coin
         CreateCoin();
     }
     void Update()
-    {
-        
+    {        
+        //if the player miss the platform, we will wait a small amount of time before instantiate another to be sure there is no another platform
         timer += Time.deltaTime;
         if (timer > delay)
-            CreateRandomPiece();
-
-        
-                
+            CreateRandomPiece();            
     }
     #endregion UNITY_EVENTS
-
     
 
     #region PUBLIC_METHODS
-
+    /// <summary>
+    /// Instantiate a coin
+    /// </summary>
     public void CreateCoin()
     {
         Vector2 coinPos = player.transform.position;
@@ -122,48 +126,71 @@ public class GameManager : MonoBehaviour
 
         Instantiate(coinPrefab , coinPos , Quaternion.identity);
     }
-
+    /// <summary>
+    /// Updates height in h
+    /// </summary>
+    /// <param name="h">values add to height</param>
     public void UpdateHeight(float h)
     {
         height += h;
     }
-
+    /// <summary>
+    /// Create a random piece, can be a damage piece if we are on medium or hard mode
+    /// </summary>
     public void CreateRandomPiece()
     {
-        //reset timr
+        //reset timer, to instante a platform base on time
         timer = 0;
-
-        //random number betewn 0 and maxChance
-        int r = Random.Range(0 , maxChance);
+        
         int index;
         GameObject clone;
 
-        //check if we instantiate a normal piece or a damage piece
-        if (r <= chanceToNormal)
+        //if we are on easy mode  just use normal pieces
+        if (GameSettings.gameMode == GameMode.EASY)
         {
             index = Random.Range(0, normalPieces.Count);
             clone = normalPieces[index];
         }
+        //if we are on medium or hard mode, maybe we can use damage pieces to kill player
         else
         {
-            index = Random.Range(0, normalPieces.Count);
-            clone = damagePieces[index];
+            //random number betewn 0 and maxChance
+            int r = Random.Range(0, maxChance);
+            //check if we instantiate a normal piece or a damage piece
+            if (r <= chanceToNormal)
+            {
+                index = Random.Range(0, normalPieces.Count);
+                clone = normalPieces[index];
+            }
+            else
+            {
+                index = Random.Range(0, damagePieces.Count);
+                clone = damagePieces[index];
+            }
         }
+                
 
         //create the piece
         InstantiatePiece(clone);
     }
-
+    /// <summary>
+    /// return a random Color
+    /// </summary>
+    /// <returns>gets a random color</returns>
     public Color GetRandomColor()
     {
         return colors[Random.Range(0 , colors.Count)];
     }
-
+    /// <summary>
+    /// ends the current game
+    /// </summary>
     public void GameOver()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
     }
-
+    /// <summary>
+    /// Aling all the platforms to be in a line, call when the player gets a coin
+    /// </summary>
     public void AlingPlatforms()
     {
         StartCoroutine(AlingPlatformsRoutine());
@@ -171,10 +198,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator AlingPlatformsRoutine()
     {
-        
+        //gets initial x from the initial platform
         float XPos = initialPlatform.position.x;
         Vector2 newPos;
-
+        //gets all the platforms and if it is conected(touching another platform), we set x to initial pos, maybe we can get this better saving all the platforms
+        //in a array when the gets instantiate and delete it when it is destroy maybe can be more faster on running, but will occupe more RAM so we need more testing,
+        //so far it goes well on mi phone
         for (int n = 0; n < piecesParent.childCount; n++)
         {
             PlatformController platform = piecesParent.GetChild(n).GetComponent<PlatformController>();
@@ -188,35 +217,7 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-        
-        /*
-        PlatformController[] platforms = new PlatformController[piecesParent.childCount];
-        float XPos = initialPlatform.position.x;
-
-        for (int n = 0; n < piecesParent.childCount; n++)
-        {
-            PlatformController platform = piecesParent.GetChild(n).GetComponent<PlatformController>();
-
-            if (platform.isConnected)
-                platforms[n] = platform;              
-            
-
-            yield return new WaitForEndOfFrame();
-        }
-
-        for (int n = 0; n < platforms.Length; n++)
-        {
-            if (platforms[n] != null)
-            {
-                Vector2 newPos = platforms[n].transform.position;
-                newPos.x = XPos;
-                platforms[n].transform.position = newPos;
-            }
-                        
-        }
-        */
-
-        Debug.Log("Player pos set");
+        //set pos of player
         newPos = player.transform.position;
         newPos.x = XPos;
         player.transform.position = newPos;
