@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 {
     #region PUBLIC_FIELDS
 
+    public float deadAnimSpeed;
+    public float deadTime;
     public int frameGroundedUpdate;
 
     [Header("Player Settings")]
@@ -17,7 +19,9 @@ public class Player : MonoBehaviour
     [Header("RayCasting 1 Settings")]
     public float offSetX;
     public float offSetY;   
-   
+    
+
+
     public Vector2 LastKnowPos
     {
         get { return lastKnowPos; }
@@ -33,6 +37,7 @@ public class Player : MonoBehaviour
 	private Animator anim;
     private GameObject currentPlatform;
     private float initialHeight;
+    private bool dead;
     private bool checkHeight;
     private bool IsGrounded
 	{
@@ -79,11 +84,19 @@ public class Player : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         initialHeight = transform.position.y;
+                       
+        
     }
 
 
     void Update()
     {
+        if (dead)
+            return;
+
+        if (GameManager.instance.gameState == GameState.GameOver)
+            return;
+
         currentFrame++;
         if (currentFrame > frameGroundedUpdate)
         {
@@ -166,9 +179,22 @@ public class Player : MonoBehaviour
 
     
 
-    public void Kill()
+    public void Kill(int dir)
     {
-        //GameManager.instance.GameOver();
+        StartCoroutine(CO_Kill(dir));            
+    }
+
+    IEnumerator CO_Kill(int dir)
+    {
+        float timer = 0;
+
+        while (timer < deadTime)
+        {
+            transform.Translate(Vector2.right * dir * deadAnimSpeed * Time.deltaTime);
+            timer += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        
     }
     
     private void SetAnimParam()

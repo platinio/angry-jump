@@ -13,7 +13,8 @@ public class PlatformController : MonoBehaviour
     [HideInInspector] public float height;
     
     [HideInInspector] public Rigidbody2D RB;
-    private SpriteRenderer SP;  
+    private SpriteRenderer SP;
+    private Collider2D col;
    
 
     public void Initialize()
@@ -23,7 +24,7 @@ public class PlatformController : MonoBehaviour
         if (RB != null)
             RB.isKinematic = true; //deactivated physics
 
-        Collider2D col = GetComponent<Collider2D>();
+        col = GetComponent<Collider2D>();
 
         if (isVertical)
             height = col.bounds.size.x;        
@@ -63,18 +64,27 @@ public class PlatformController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        if (col == null)
+            return;
+        if (RB == null)
+            return;
 
         if (other.gameObject.CompareTag(Constants.instance.tags.platform))
         {
             if (!isConnected)
-                isConnected = !isConnected;           
+                isConnected = !isConnected;
+
+            if (Mathf.Abs(transform.position.y - other.transform.position.y) < col.bounds.size.y)
+            {
+                speed = 0;
+                RB.isKinematic = false;
+            }
         }
 
-        if (speed == 0)
-            return;
+        //if (speed == 0)
+       //     return;
 
-        if (RB == null)
-            return;
+        
         
 
         if (other.gameObject.CompareTag(Constants.instance.tags.player))
@@ -94,8 +104,7 @@ public class PlatformController : MonoBehaviour
         if (other.gameObject.CompareTag(Constants.instance.tags.platform))
         {
             if (isConnected)
-                isConnected = !isConnected;
-           
+                isConnected = !isConnected;           
         }
     }
 

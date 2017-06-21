@@ -4,12 +4,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum GameState
+{
+    Playing,
+    GameOver,
+    Pause
+}
+
+
 // ========================================= //
 // Name: GameManager.cs
 // Description: Controls game flow, instantiate new platforms, and decides positions
 // ========================================= //
 public class GameManager : MonoBehaviour
 {
+    AnimatorOverrideController overrideAnimator;
     //singleton
     #region SINGLETON
     private static GameManager gameManager;
@@ -34,6 +43,7 @@ public class GameManager : MonoBehaviour
     #endregion SINGLETON
 
     #region PUBLIC_FIELDS
+    public GameState gameState { get { return _gameState; } }
     public float errorRange;
     public float coinDistance;
     public GameObject coinPrefab;
@@ -47,9 +57,11 @@ public class GameManager : MonoBehaviour
     [Tooltip("Distance in x plane betewn player and piece")] public int distance;
     public float height;
     [HideInInspector] public Transform initialPlatform;
+    public Transform playerPos;
     #endregion PUBLIC_FIELDS
 
     #region PRIVATE_FIELDS    
+    private GameState _gameState;
     private float timer;
     private Player player;
     private Transform piecesParent;
@@ -64,8 +76,10 @@ public class GameManager : MonoBehaviour
     #region UNITY_EVENTS
     void Awake()
     {
+        string characterName = GameSettings.characterName;
+        GameObject playerGO = Instantiate(Resources.Load<GameObject>("Characters/" + characterName + "/" + characterName) , playerPos.position , Quaternion.identity);
         //get references
-        player = GameObject.FindObjectOfType<Player>();
+        player = playerGO.GetComponent<Player>();
 
         if (player == null)
         {
@@ -186,7 +200,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
+        if (_gameState == GameState.GameOver)
+            return;
+
+        _gameState = GameState.GameOver;
+        UIManager.instance.ShowGameOverTimer();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
     }
     /// <summary>
     /// Aling all the platforms to be in a line, call when the player gets a coin

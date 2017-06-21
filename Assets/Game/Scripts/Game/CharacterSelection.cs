@@ -20,7 +20,11 @@ public class CharacterSelection : MonoBehaviour
         PlatinioUI.instance.OnAnimationComplete += Initialize;
     }
 
-    
+    void Update()
+    {
+        Debug.Log(currentSelection);
+    }
+
     public void Initialize()
     {
         currentItem = Instantiate(items[currentSelection] , window.transform) as GameObject;

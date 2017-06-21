@@ -10,6 +10,6 @@ public class GameOver : MonoBehaviour
     void Start()
     {
         thisScreen = GetComponent<UIScreen>();
-        thisScreen.ShowElement("GameOver");
+        //thisScreen.ShowElement("GameOver");
     }
 }

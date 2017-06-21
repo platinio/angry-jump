@@ -28,11 +28,15 @@ public class UIManager : MonoBehaviour
     #endregion SINGLETON
 
     public Text score;
+    public GameObject gameOverTimerScreen;
    
 
     private int currentScore;
 
-
+    public void ShowGameOverTimer()
+    {
+        gameOverTimerScreen.SetActive(true);
+    }
 
     public void AddScore()
     {
