@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+/// <summary>
+/// Save constans use in other scripts
+/// </summary>
 public class Constants : MonoBehaviour
 {
 

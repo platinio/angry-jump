@@ -4,41 +4,48 @@ using UnityEngine;
 
 public class CharacterSelection : MonoBehaviour
 {
-    public List<GameObject> items;
-    public GameObject window;
-    public float animTime;
-    public LeanTweenType ease;
+    //inspector
+    [SerializeField] private List<GameObject>   _items               = null;
+    [SerializeField] private Transform          _window              = null;
+    [SerializeField] private float              _animTime            = 0.5f;
+    [SerializeField] private LeanTweenType      _ease                = LeanTweenType.easeInElastic;
+    [SerializeField] private int                _currentSelection    = 0;
 
-    public int currentSelection;
-    private GameObject beforeItem;
-    private GameObject currentItem;
-    private GameObject nextItem;
-    private bool isBusy;
+    //private
+    private GameObject beforeItem       = null;
+    private GameObject currentItem      = null;
+    private GameObject nextItem         = null;
+    private bool isBusy                 = false;
+
+    //public
+    public int CurrentSelection { get { return _currentSelection; } }
+
 
     void Start()
     {
+        //initialize after the animation
         PlatinioUI.instance.OnAnimationComplete += Initialize;
+        _window = transform.parent;
     }
 
-    void Update()
-    {
-        Debug.Log(currentSelection);
-    }
-
+   
+    /// <summary>
+    /// Initialize the character selection window
+    /// </summary>
     public void Initialize()
     {
-        currentItem = Instantiate(items[currentSelection] , window.transform) as GameObject;
+        currentItem = Instantiate(_items[_currentSelection] , _window) as GameObject;
         currentItem.transform.localScale = Vector3.one;
         currentItem.transform.position = new Vector3(0, 0, 0);
 
-        if (items.Count > 1)
+        if (_items.Count > 1)
         {
-            nextItem = Instantiate(items[currentSelection + 1], window.transform) as GameObject;
+            nextItem = Instantiate(_items[_currentSelection + 1], _window) as GameObject;
             nextItem.transform.localScale = Vector3.one;
             nextItem.transform.position = new Vector3(PlatinioUI.instance.horizontalOffset , 0 , 0);
         }
 
-        beforeItem = Instantiate(items[items.Count - 1], window.transform) as GameObject;
+        beforeItem = Instantiate(_items[_items.Count - 1], _window) as GameObject;
         beforeItem.transform.localScale = Vector3.one;
         beforeItem.transform.position = new Vector3(-PlatinioUI.instance.horizontalOffset, 0, 0);
 
@@ -46,20 +53,25 @@ public class CharacterSelection : MonoBehaviour
         PlatinioUI.instance.OnAnimationComplete -= Initialize;
     }
 
+    /// <summary>
+    /// Move to next selection
+    /// </summary>
     public void MoveToNext()
     {
+        //if we are animating comeback
         if (isBusy)
             return;
 
+        //set what we are busy
         isBusy = true;
 
-        currentSelection++;
+        _currentSelection++;
 
-        if (currentSelection > items.Count - 1)
-            currentSelection = 0;
+        if (_currentSelection > _items.Count - 1)
+            _currentSelection = 0;
 
-        LeanTween.moveX(currentItem, currentItem.transform.position.x - PlatinioUI.instance.horizontalOffset, animTime).setEase(ease);
-        LeanTween.moveX(nextItem, nextItem.transform.position.x - PlatinioUI.instance.horizontalOffset, animTime).setEase(ease).setOnComplete(() =>
+        LeanTween.moveX(currentItem, currentItem.transform.position.x - PlatinioUI.instance.horizontalOffset, _animTime).setEase(_ease);
+        LeanTween.moveX(nextItem, nextItem.transform.position.x - PlatinioUI.instance.horizontalOffset, _animTime).setEase(_ease).setOnComplete(() =>
         {
             isBusy = false;
         }
@@ -67,20 +79,20 @@ public class CharacterSelection : MonoBehaviour
         
         if(beforeItem != null)
             Destroy(beforeItem);
-
+        //update items
         beforeItem = currentItem;
         currentItem = nextItem;
         
-        if (currentSelection + 1 < items.Count)
+        if (_currentSelection + 1 < _items.Count)
         {
-            nextItem = Instantiate(items[currentSelection + 1], window.transform) as GameObject;
+            nextItem = Instantiate(_items[_currentSelection + 1], _window) as GameObject;
             nextItem.transform.localScale = Vector3.one;
             nextItem.transform.position = new Vector3(PlatinioUI.instance.horizontalOffset, 0, 0);
         }
 
         else
         {
-            nextItem = Instantiate(items[0], window.transform) as GameObject;
+            nextItem = Instantiate(_items[0], _window) as GameObject;
             nextItem.transform.localScale = Vector3.one;
             nextItem.transform.position = new Vector3(PlatinioUI.instance.horizontalOffset, 0, 0);
             
@@ -90,6 +102,9 @@ public class CharacterSelection : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Move to previus selection
+    /// </summary>
     public void MoveToBefore()
     {
 
@@ -98,11 +113,11 @@ public class CharacterSelection : MonoBehaviour
 
         isBusy = true;
 
-        currentSelection--;
-        if (currentSelection < 0)
-            currentSelection = items.Count - 1;
-        LeanTween.moveX(currentItem, currentItem.transform.position.x + PlatinioUI.instance.horizontalOffset, animTime).setEase(ease);
-        LeanTween.moveX(beforeItem, beforeItem.transform.position.x + PlatinioUI.instance.horizontalOffset, animTime).setEase(ease).setOnComplete(() =>
+        _currentSelection--;
+        if (_currentSelection < 0)
+            _currentSelection = _items.Count - 1;
+        LeanTween.moveX(currentItem, currentItem.transform.position.x + PlatinioUI.instance.horizontalOffset, _animTime).setEase(_ease);
+        LeanTween.moveX(beforeItem, beforeItem.transform.position.x + PlatinioUI.instance.horizontalOffset, _animTime).setEase(_ease).setOnComplete(() =>
         {
             isBusy = false;
         }
@@ -116,20 +131,20 @@ public class CharacterSelection : MonoBehaviour
       
 
 
-        if (currentSelection - 1 >= 0)
+        if (_currentSelection - 1 >= 0)
         {
-            beforeItem = Instantiate(items[currentSelection - 1], window.transform) as GameObject;
+            beforeItem = Instantiate(_items[_currentSelection - 1], _window) as GameObject;
             beforeItem.transform.localScale = Vector3.one;
             beforeItem.transform.position = new Vector3(-PlatinioUI.instance.horizontalOffset, 0, 0);
         }
         else
         {
-            beforeItem = Instantiate(items[items.Count - 1], window.transform) as GameObject;
+            beforeItem = Instantiate(_items[_items.Count - 1], _window) as GameObject;
             beforeItem.transform.localScale = Vector3.one;
             beforeItem.transform.position = new Vector3(-PlatinioUI.instance.horizontalOffset, 0, 0);
         }
 
-        Debug.Log(currentSelection);
+        
     }
 
 }

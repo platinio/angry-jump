@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
         if (dead)
             return;
 
-        if (GameManager.instance.gameState == GameState.GameOver)
+        if (GameManager.instance.GameState == GameState.GameOver)
             return;
 
         currentFrame++;

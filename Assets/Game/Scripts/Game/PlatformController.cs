@@ -39,7 +39,7 @@ public class PlatformController : MonoBehaviour
     void Update()
     {
 
-        if (transform.position.y < GameManager.instance.initialPlatform.position.y)
+        if (transform.position.y < GameManager.instance.InitialPlatform.position.y)
             Destroy(gameObject , 3.0f);
         
         if (speed == 0)

@@ -29,14 +29,20 @@ public class UIManager : MonoBehaviour
 
     public Text score;
     public GameObject gameOverTimerScreen;
+    [SerializeField] private Button _useLife;
    
 
     private int currentScore;
 
     public void ShowGameOverTimer()
     {
+        //show gameOver screen
         gameOverTimerScreen.SetActive(true);
+        //if we have lives enable button
+        _useLife.interactable = PlayerPrefs.GetInt("lives") > 0;
     }
+
+
 
     public void AddScore()
     {
