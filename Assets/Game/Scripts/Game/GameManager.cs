@@ -234,6 +234,8 @@ public class GameManager : MonoBehaviour
         if (_gameState == GameState.GameOver)
             return;
 
+        SoundManager.instance.PlayGameOverSound();
+
         StaticData.numberOfDies++;
 
         if (StaticData.numberOfDies == 2)

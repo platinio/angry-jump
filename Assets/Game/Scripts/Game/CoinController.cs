@@ -31,6 +31,7 @@ public class CoinController : MonoBehaviour
         //if we collision the player
         if (other.gameObject.CompareTag(Constants.instance.tags.player))
         {
+            SoundManager.instance.PlayGrabCoinSound();
             GameManager.instance.AlingPlatforms();
             GameManager.instance.CreateCoin();
             Destroy(gameObject);            

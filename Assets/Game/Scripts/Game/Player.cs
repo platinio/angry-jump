@@ -185,6 +185,8 @@ public class Player : MonoBehaviour
     /// </summary>
     private void _Jump()
     {
+        SoundManager.instance.PlayJumpSound();
+
         _RB.velocity = new Vector2(0, 0);
         _RB.AddForce(new Vector2(0, _jumpForce));                
     }
@@ -192,6 +194,7 @@ public class Player : MonoBehaviour
    
     public void Kill(int dir)
     {
+        SoundManager.instance.PlayHitSound();
         StartCoroutine(CO_Kill(dir));            
     }
 
