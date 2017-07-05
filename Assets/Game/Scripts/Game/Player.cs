@@ -6,44 +6,42 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
-    #region PUBLIC_FIELDS
+   
 
-    public float deadAnimSpeed;
-    public float deadTime;
-    public int frameGroundedUpdate;
+    //inspector
+    [SerializeField] private float _deadAnimSpeed   = 5.0f;
+    [SerializeField] private float _deadTime        = 0.6f;
 
     [Header("Player Settings")]
-	public float jumpForce;
-    public float rayLength;
+    [SerializeField] private float _jumpForce       = 450.0f;
+    [SerializeField] private float _rayLength       = 0.47f;
 
     [Header("RayCasting 1 Settings")]
-    public float offSetX;
-    public float offSetY;   
+    [SerializeField] private float _offSetX         = 0.24f;
+    [SerializeField] private float _offSetY         = -0.63f;
     
+    //how fast we update the IsGrounded
+    private int frameGroundedUpdate = 5;
 
-
-    public Vector2 LastKnowPos
-    {
-        get { return lastKnowPos; }
-        private set { lastKnowPos = value; }
-    }
-
-    #endregion PUBLIC_FIELDS
-
+    
     #region PRIVATE_FIELDS
-    private int currentFrame;
-    private Vector2 lastKnowPos;
-    private Rigidbody2D RB;
-	private Animator anim;
-    private GameObject currentPlatform;
-    private float initialHeight;
-    private bool dead;
-    private bool checkHeight;
+    private float           _maxFallSpeed       = 6.3f;
+    private int             _currentFrame       = 0;
+    private Vector2         _lastKnowPos        = Vector2.zero;
+    private Rigidbody2D     _RB                 = null;
+	private Animator        _anim               = null;
+    private GameObject      _currentPlatform    = null;
+    private float           _initialHeight      = 0.0f;
+    private bool            _dead               = false;
+    private bool            _checkHeight        = false;
+    
+    public bool isDead { get { return _dead; } set { _dead = value; } }
+
     private bool IsGrounded
 	{
 		get
 		{
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + offSetX , transform.position.y + offSetY), Vector2.left, rayLength, Constants.instance.layers.Platform);
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + _offSetX , transform.position.y + _offSetY), Vector2.left, _rayLength, Constants.instance.layers.Platform);
                                   
 
             if (hit.collider == null)
@@ -52,59 +50,60 @@ public class Player : MonoBehaviour
 
             GameObject platform = hit.collider.gameObject;
 
-            if (currentPlatform != null)
+            if (_currentPlatform != null)
             {
-                if (currentPlatform != platform)
+                if (_currentPlatform != platform)
                 {
-                    currentPlatform = platform;
+                    _currentPlatform = platform;
                     UIManager.instance.AddScore();
                 }
             }
 
             else
             {
-                currentPlatform = platform;
+                _currentPlatform = platform;
                 //UIManager.instance.AddScore();
             }
-               
 
+           
 			return true;		
 		}
 	}
     #endregion PRIVATE_FIELDS
 
+    public Vector2 LastKnowPos {  get { return _lastKnowPos; } private set { _lastKnowPos = value; }}    
+
     void Awake()
     {
-        lastKnowPos = transform.position;
+        _lastKnowPos = transform.position;
     }
     public void Initialize()
-    {
-        
+    {        
         //get references
-        RB = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        initialHeight = transform.position.y;
-                       
-        
+        _RB             = GetComponent<Rigidbody2D>();
+        _anim           = GetComponent<Animator>();
+        _initialHeight  = transform.position.y;
     }
 
 
     void Update()
     {
-        if (dead)
+        //if we are dead return
+        if (_dead)
             return;
-
+        //if the game if over return
         if (GameManager.instance.GameState == GameState.GameOver)
             return;
 
-        currentFrame++;
-        if (currentFrame > frameGroundedUpdate)
+        //update last know position
+        _currentFrame++;
+        if (_currentFrame > frameGroundedUpdate)
         {
             if (IsGrounded)
             {
                 //update last know position
-                lastKnowPos = transform.position;
-                currentFrame = 0;
+                _lastKnowPos = transform.position;
+                _currentFrame = 0;
             }
         }
             
@@ -130,8 +129,12 @@ public class Player : MonoBehaviour
 
         //SetAnimParam();
         //if we fall
-        if (transform.position.y < (initialHeight - 1))
+        if (transform.position.y < (_initialHeight - 1))
+        {
             GameManager.instance.GameOver();
+            _dead = true;
+        }
+            
 
        
 
@@ -140,11 +143,20 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (RB.velocity.x != 0)
+        //unable physics on horizontal forces
+        if (_RB.velocity.x != 0)
         {
-            Vector2 newVelocity = RB.velocity;
+            Vector2 newVelocity = _RB.velocity;
             newVelocity.x = 0;
-            RB.velocity = newVelocity;
+            _RB.velocity = newVelocity;
+        }
+
+        //check falling speed
+        if(_RB.velocity.y < -_maxFallSpeed)
+        {
+            Vector2 newVelocity = _RB.velocity;
+            newVelocity.y = -_maxFallSpeed;
+            _RB.velocity = newVelocity;
         }
     }
 
@@ -173,12 +185,11 @@ public class Player : MonoBehaviour
     /// </summary>
     private void _Jump()
     {
-        RB.velocity = new Vector2(0, 0);
-        RB.AddForce(new Vector2(0, jumpForce));                
+        _RB.velocity = new Vector2(0, 0);
+        _RB.AddForce(new Vector2(0, _jumpForce));                
     }
 
-    
-
+   
     public void Kill(int dir)
     {
         StartCoroutine(CO_Kill(dir));            
@@ -186,12 +197,18 @@ public class Player : MonoBehaviour
 
     IEnumerator CO_Kill(int dir)
     {
+        
         float timer = 0;
-
-        while (timer < deadTime)
+        while (timer < _deadTime)
         {
-            transform.Translate(Vector2.right * dir * deadAnimSpeed * Time.deltaTime);
+
+            
+            transform.Translate(Vector2.right * dir * _deadAnimSpeed * Time.deltaTime);
             timer += Time.deltaTime;
+
+            if (_dead)
+                timer = _deadTime;
+
             yield return new WaitForEndOfFrame();
         }
         
@@ -199,16 +216,16 @@ public class Player : MonoBehaviour
     
     private void SetAnimParam()
     {
-        anim.SetBool("Idle", IsGrounded);
-        anim.SetBool("Fall", RB.velocity.y < 0.1);
-        anim.SetBool("Jump", RB.velocity.y > 0.1);
+        _anim.SetBool("Idle", IsGrounded);
+        _anim.SetBool("Fall", _RB.velocity.y < 0.1);
+        _anim.SetBool("Jump", _RB.velocity.y > 0.1);
     }
     
     //
     void OnDrawGizmosSelected()
     {
         //draw ray 1
-        Debug.DrawLine(new Vector2(transform.position.x + offSetX , transform.position.y + offSetY), new Vector2(transform.position.x + offSetX -rayLength, transform.position.y + offSetY), Color.red);
+        Debug.DrawLine(new Vector2(transform.position.x + _offSetX , transform.position.y + _offSetY), new Vector2(transform.position.x + _offSetX - _rayLength, transform.position.y + _offSetY), Color.red);
       
 
     }

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// push the player to fall and dead
+/// </summary>
 public class PlayerDeadZoneController : MonoBehaviour
 {
-    private Player player;
+    private Player _player;
 
     void Start()
     {
-        player = GameObject.FindObjectOfType<Player>();
+        _player = GameObject.FindObjectOfType<Player>();
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -17,7 +20,7 @@ public class PlayerDeadZoneController : MonoBehaviour
         {
             int dir = other.transform.position.x > transform.position.x ? -1 : 1;
 
-            player.Kill(dir);
+            _player.Kill(dir);
             //GameManager.instance.GameOver();
         }
             

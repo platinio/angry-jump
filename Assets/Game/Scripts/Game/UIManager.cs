@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls the ui for the gameplay
+/// </summary>
 public class UIManager : MonoBehaviour 
 {
     #region SINGLETON
@@ -27,41 +30,49 @@ public class UIManager : MonoBehaviour
     }
     #endregion SINGLETON
 
-    public Text score;
-    public GameObject gameOverTimerScreen;
-    [SerializeField] private Button _useLife;
+    //inspector
+    [SerializeField] private Text _score                    = null;
+    [SerializeField] private GameObject _gameOverTimer      = null;
+    [SerializeField] private Button _useLife                = null;
    
-
-    private int currentScore;
+    //private
+    private int _currentScore   = 0;
 
     public void ShowGameOverTimer()
     {
         //show gameOver screen
-        gameOverTimerScreen.SetActive(true);
+        _gameOverTimer.SetActive(true);
         //if we have lives enable button
         _useLife.interactable = PlayerPrefs.GetInt("lives") > 0;
     }
 
+    public void HideGameOverTimer()
+    {
+        //hide ui
+        _gameOverTimer.SetActive(false);
+    }
 
-
+    /// <summary>
+    /// add a score point
+    /// </summary>
     public void AddScore()
     {
-        currentScore++;
-        int length = currentScore.ToString().Length;
+        _currentScore++;
+        int length = _currentScore.ToString().Length;
 
         string text = string.Empty;
 
         if (length == 1)
-            text = "Score 000" + currentScore;
+            text = "Score 000" + _currentScore;
         else if (length == 2)
-            text = "Score 00" + currentScore;
+            text = "Score 00" + _currentScore;
         else if (length == 3)
-            text = "Score 0" + currentScore;
+            text = "Score 0" + _currentScore;
         else
-            text = "Score " + currentScore;
+            text = "Score " + _currentScore;
 
 
-        score.text = text;
+        _score.text = text;
 
     }
 

@@ -6,23 +6,22 @@ using UnityEngine.UI;
 
 public class ShopWindow : MonoBehaviour
 {
-    public Button buyFiveLives;
-    public Button buyTenLives;
-    public Button buyTwentyLives;
+    [SerializeField] private Button _buyFiveLives       = null;
+    [SerializeField] private Button _buyTenLives        = null;
+    [SerializeField] private Button _buyTwentyLives     = null;
 
-    private ShopManager shopManager;
+    private ShopManager _shopManager    = null;
 
     void Start()
     {
-        shopManager = GameObject.FindObjectOfType<ShopManager>();
-
+        _shopManager = GameObject.FindObjectOfType<ShopManager>();
         SetButtonReferences();
     }
 
     private void SetButtonReferences()
     {
-        buyFiveLives.onClick.AddListener(delegate { shopManager.Buy("livex5"); });
-        buyTenLives.onClick.AddListener(delegate { shopManager.Buy("livex10"); });
-        buyTwentyLives.onClick.AddListener(delegate { shopManager.Buy("livex20"); });
+        _buyFiveLives.onClick.AddListener       (delegate { _shopManager.Buy("livex5");  });
+        _buyTenLives.onClick.AddListener        (delegate { _shopManager.Buy("livex10"); });
+        _buyTwentyLives.onClick.AddListener     (delegate { _shopManager.Buy("livex20"); });
     }
 }

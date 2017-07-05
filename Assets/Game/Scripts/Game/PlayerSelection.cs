@@ -6,19 +6,21 @@ using UnityEngine.UI;
 
 public class PlayerSelection : MonoBehaviour 
 {
-    public Button backButton;
-    public Button choosePlayerButton;
+    //inspector
+    [SerializeField] private Button _backButton             = null;
+    [SerializeField] private Button _choosePlayerButton     = null;
 
-    private CharacterSelection characterSelection;
+    //private
+    private CharacterSelection _characterSelection   = null;
     
     void Start()
     {
-        characterSelection = GameObject.FindObjectOfType<CharacterSelection>();
+        _characterSelection = GameObject.FindObjectOfType<CharacterSelection>();
 
-        backButton.onClick.AddListener(delegate { PlatinioUI.instance.MoveToBack(); });
-        choosePlayerButton.onClick.AddListener(delegate 
+        _backButton.onClick.AddListener(delegate { PlatinioUI.instance.MoveToBack(); });
+        _choosePlayerButton.onClick.AddListener(delegate 
         {
-            GameSettings.characterSelected = (CharacterSelected)characterSelection.CurrentSelection;
+            GameSettings.characterSelected = (CharacterSelected)_characterSelection.CurrentSelection;
             PlatinioUI.instance.MoveToNext(); 
         });
     }

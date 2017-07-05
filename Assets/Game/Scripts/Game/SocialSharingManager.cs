@@ -6,6 +6,7 @@ using UnityEngine;
 
 public static class SocialSharingManager 
 {
+    //the default image to share
     private static Texture2D defaultImageToShare
     {
         get 
@@ -18,30 +19,28 @@ public static class SocialSharingManager
         set { _defaultImageToShare = value; }
     }
 
-    private static Texture2D _defaultImageToShare;
-
-    private static readonly string playStoreURL = "Insert URL here";
-    private static readonly string shareTitle = "Share me!";
-    private static readonly string shareContent = "Play this awesome game!";
+    private static Texture2D        _defaultImageToShare    = null;
+    private static readonly string  _playStoreURL           = "Insert URL here";
+    private static readonly string  _shareTitle             = "Share me!";
+    private static readonly string  _shareContent           = "Play this awesome game!";
    
 
     
     public static void FacebookDefaultShare()
-    {
-        
-        //first check if android is installed
+    {        
+        //first check if facebook is installed
         AndroidNativeUtility.OnPackageCheckResult += OnFacebookPackageCheckResult;
         AndroidNativeUtility.Instance.CheckIsPackageInstalled("com.facebook.katana");        
     }
 
     public static void TwitterDefaultShare()
     {
-        AndroidSocialGate.StartShareIntent(shareTitle, shareContent  + " " + playStoreURL, defaultImageToShare, "twi");
+        AndroidSocialGate.StartShareIntent(_shareTitle, _shareContent  + " " + _playStoreURL, defaultImageToShare, "twi");
     }
 
     public static void NativeSharing()
     {
-        AndroidSocialGate.StartShareIntent(shareTitle, shareContent + " " + playStoreURL, defaultImageToShare);
+        AndroidSocialGate.StartShareIntent(_shareTitle, _shareContent + " " + _playStoreURL, defaultImageToShare);
     }
 
     private static void OnFacebookPackageCheckResult(AN_PackageCheckResult res)
@@ -49,7 +48,7 @@ public static class SocialSharingManager
         if(res.IsSucceeded)
         {
             //if is installed lest shared it
-            AndroidSocialGate.StartShareIntent(shareTitle, shareContent + " " + playStoreURL, defaultImageToShare, "facebook.katana");
+            AndroidSocialGate.StartShareIntent(_shareTitle, _shareContent + " " + _playStoreURL, defaultImageToShare, "facebook.katana");
         }
 
         else

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -29,9 +30,8 @@ public class GameManager : MonoBehaviour
             if (!gameManager)
             {
                 gameManager = FindObjectOfType(typeof(GameManager)) as GameManager;
-
-
-
+                
+                                
                 if (!gameManager)
                     Debug.LogError("You need to have a GameManager script active in the scene");
             }
@@ -72,30 +72,34 @@ public class GameManager : MonoBehaviour
     private PlatformController  _previusPlatform    = null;
     private PlatformController  _currentPlatform    = null;
 
+
     //public   
     public GameState GameState          { get { return _gameState;          } }
     public Transform InitialPlatform    { get { return _initialPlatform;    } }
-    
 
+    
     #region UNITY_EVENTS
     void Awake()
     {
         //initialize player
-        string characterName    = GameSettings.characterName;
+        string characterName = GameSettings.characterName;
         string dir = "Characters/" + characterName + "/" + characterName;
         Debug.Log(dir);
-        GameObject playerGO     = Instantiate(Resources.Load<GameObject>(dir) , _playerPos.position , Quaternion.identity);
+        GameObject playerGO = Instantiate(Resources.Load<GameObject>(dir), _playerPos.position, Quaternion.identity);
         Debug.Log(playerGO.name);
         //get references
-        _player = playerGO.GetComponent<Player>();          
+        _player = playerGO.GetComponent<Player>();
 
         //create piecesParent
-        _piecesParent       = new GameObject("PiecesParent").transform;        
-        _initialPlatform    = GameObject.Find("SmallPlatform").transform;
+        _piecesParent = new GameObject("PiecesParent").transform;
+        _initialPlatform = GameObject.Find("SmallPlatform").transform;
+
+       
     }
 
     void Start()
     {
+
         //set initial color to start platform
         for (int n = 0; n < _initialPlatform.childCount; n++)
         {
@@ -107,7 +111,7 @@ public class GameManager : MonoBehaviour
         //get the initial height
         _playerSP = _player.GetComponent<SpriteRenderer>();
         //Initialize height to 0
-        ResetHeight();             
+        ResetHeight();
         //reduce to %        
         _chanceToNormal /= 10;
         _player.Initialize();
@@ -115,7 +119,12 @@ public class GameManager : MonoBehaviour
         CreateRandomPiece();
         //create a initial coin
         CreateCoin();
+
+        
     }
+
+   
+
     void Update()
     {
         if (_gameState == GameState.GameOver)
@@ -135,9 +144,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void RevivePlayer()
     {
+        //TO DO: discount a life
+        _player.isDead                                  = false;        
         _player.GetComponent<Rigidbody2D>().velocity    = Vector2.zero;
-        _player.transform.position                      = new Vector3(_initialPlatform.position.x , _height + 5.0f);
+        _player.transform.position                      = new Vector3(_initialPlatform.position.x , _player.LastKnowPos.y + 2.5f);
         _gameState                                      = GameState.Playing;
+        _timer                                          = 0.0f;
+
+        UIManager.instance.HideGameOverTimer();        
     }
 
     /// <summary>
@@ -157,6 +171,7 @@ public class GameManager : MonoBehaviour
     public void UpdateHeight(float h)
     {
         _height += h;
+        _timer  = 0.0f;
     }
     /// <summary>
     /// Create a random piece, can be a damage piece if we are on medium or hard mode
@@ -205,6 +220,12 @@ public class GameManager : MonoBehaviour
     {
         return _colors[Random.Range(0 , _colors.Count)];
     }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     /// <summary>
     /// ends the current game
     /// </summary>
@@ -212,6 +233,14 @@ public class GameManager : MonoBehaviour
     {
         if (_gameState == GameState.GameOver)
             return;
+
+        StaticData.numberOfDies++;
+
+        if (StaticData.numberOfDies == 2)
+        {
+            Debug.Log("loading ads");
+            StaticData.numberOfDies = 0;
+        }
 
         _gameState = GameState.GameOver;
         UIManager.instance.ShowGameOverTimer();

@@ -87,12 +87,15 @@ public class PlatformController : MonoBehaviour
         
         
 
-        if (other.gameObject.CompareTag(Constants.instance.tags.player))
+        if (other.gameObject.CompareTag(Constants.instance.tags.player) )
         {
+            if(RB.isKinematic)
+                Invoke("CreatePlatform", Constants.instance.values.createPlatformDelay);
+
             RB.isKinematic = false; //reactivated physics
             speed = 0;
             GameManager.instance.UpdateHeight(height);
-            Invoke("CreatePlatform", Constants.instance.values.createPlatformDelay);
+            
             //GameManager.instance.CreateRandomPiece();//reate another piece
         }
 

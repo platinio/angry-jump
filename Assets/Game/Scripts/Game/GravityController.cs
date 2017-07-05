@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class GravityController : MonoBehaviour 
 {
-    public float rot;
-    public float minAngle;
-    public float maxAngle;
-    public float maxGravitySpeed;
-    public float gravitySpeed;
-
-    private float speed;
+    [SerializeField] private float _rot                 = 0.0f;
+    [SerializeField] private float _minAngle            = 30.0f;
+    [SerializeField] private float _maxAngle            = 300.0f;
+    [SerializeField] private float _maxGravitySpeed     = 12.0f;
+    
+    private float _gravitySpeed     = 0.0f;
+    private float _speed            = 0.0f;
 
     void Start()
     {
-        speed = maxAngle / maxGravitySpeed;
+        _speed = _maxAngle / _maxGravitySpeed;
 
         Vector2 gravity = Physics2D.gravity;
         gravity.x = 0;
@@ -24,9 +24,10 @@ public class GravityController : MonoBehaviour
 
     void Update()
     {
-        rot = Input.acceleration.x * 360.0f;
+        _rot = Input.acceleration.x * 360.0f;
 
-        if (Mathf.Abs(rot) < minAngle)
+        //if we are in a normal range
+        if (Mathf.Abs(_rot) < _minAngle)
         {
             if (Physics2D.gravity.x != 0)
             {
@@ -38,13 +39,14 @@ public class GravityController : MonoBehaviour
             return;
         }
 
-        gravitySpeed = rot / speed;
+
+        _gravitySpeed = _rot / _speed;
         
-        if (gravitySpeed < -maxGravitySpeed)
-            gravitySpeed = -maxGravitySpeed;
-        else if (gravitySpeed > maxGravitySpeed)
-            gravitySpeed = maxGravitySpeed;
+        if (_gravitySpeed < -_maxGravitySpeed)
+            _gravitySpeed = -_maxGravitySpeed;
+        else if (_gravitySpeed > _maxGravitySpeed)
+            _gravitySpeed = _maxGravitySpeed;
         
-        Physics2D.gravity = new Vector2(gravitySpeed , Physics2D.gravity.y);
+        Physics2D.gravity = new Vector2(_gravitySpeed , Physics2D.gravity.y);
     }
 }
